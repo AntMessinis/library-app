@@ -10,7 +10,7 @@ import java.util.List;
 import library_app.dao.dbutil.DBUtil;
 import library_app.model.Subcategory;
 
-public class SubcategoryDAOImpl implements IGenericDAO<Subcategory>{
+public class SubcategoryDAOImpl implements ISubcategoryDAO{
 
 	@Override
 	public void insert(Subcategory m) throws SQLException {

@@ -11,7 +11,7 @@ import library_app.dao.dbutil.DBUtil;
 import library_app.model.Author;
 import library_app.model.Country;
 
-public class AuthorDAOImpl implements IGenericDAO<Author>{
+public class AuthorDAOImpl implements IAuthorDAO{
 
 	@Override
 	public void insert(Author m) throws SQLException {
@@ -54,7 +54,7 @@ public class AuthorDAOImpl implements IGenericDAO<Author>{
 
 	@Override
 	public void delete(Author m) throws SQLException {
-		String sql = "delete * from authors where id=?";
+		String sql = "delete from authors where id=?";
 		try	(Connection conn = DBUtil.openConnection();
 				PreparedStatement ps = conn.prepareStatement(sql)){
 			ps.setLong(1, m.getId());

@@ -6,8 +6,8 @@ public class Book extends AbstractEntity{
 	private Author author;
 	private Language language;
 	private Subcategory category;
-	
-	private int amountInLibrary;
+	private String description;
+	private int copiesInLibrary;
 	private int currentlyBorrowed;
 	
 	
@@ -16,7 +16,7 @@ public class Book extends AbstractEntity{
 	}
 	
 	
-	public Book(long id, String title, String isbn, Author author, Language language, Subcategory category, int amountInLibrary,
+	public Book(long id, String title, String isbn, Author author, Language language, Subcategory category, String description, int copiesInLibrary,
 			int currentlyBorrowed) {
 		super(id);
 		this.title = title;
@@ -24,10 +24,23 @@ public class Book extends AbstractEntity{
 		this.author = author;
 		this.language = language;
 		this.category = category;
-		this.amountInLibrary = amountInLibrary;
+		this.description = description;
+		this.copiesInLibrary = copiesInLibrary;
 		this.currentlyBorrowed = currentlyBorrowed;
 	}
 
+	public Book( String title, String isbn, Author author, Language language, Subcategory category, String description, int copiesInLibrary,
+			int currentlyBorrowed) {
+		super();
+		this.title = title;
+		this.isbn = isbn;
+		this.author = author;
+		this.language = language;
+		this.category = category;
+		this.description = description;
+		this.copiesInLibrary = copiesInLibrary;
+		this.currentlyBorrowed = currentlyBorrowed;
+	}
 
 	public String getTitle() {
 		return title;
@@ -59,19 +72,31 @@ public class Book extends AbstractEntity{
 	public void setCategory(Subcategory category) {
 		this.category = category;
 	}
-	public int getAmountInLibrary() {
-		return amountInLibrary;
+	public int getCopiesInLibrary() {
+		return copiesInLibrary;
 	}
-	public void setAmountInLibrary(int amountInLibrary) {
-		this.amountInLibrary = amountInLibrary;
+	public void setCopiesInLibrary(int amountInLibrary) {
+		this.copiesInLibrary = amountInLibrary;
 	}
-	public int getCurrentlyBorrowed() {
+	public int getCopiesCurrentlyBorrowed() {
 		return currentlyBorrowed;
 	}
 	public void setCurrentlyBorrowed(int currentlyBorrowed) {
 		this.currentlyBorrowed = currentlyBorrowed;
 	}
 	
+	public String getDescription() {
+		return description;
+	}
+
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+
+
+
 	@Override
 	public boolean equals(Object obj) {
 		if (obj == this) return true;
@@ -86,7 +111,8 @@ public class Book extends AbstractEntity{
 				&& (author.equals(other.author))
 				&& (language.equals(other.language))
 				&& (category.equals(other.category))
-				&& (amountInLibrary == other.amountInLibrary)
+				&& (description.equals(other.description))
+				&& (copiesInLibrary == other.copiesInLibrary)
 				&& (currentlyBorrowed == other.currentlyBorrowed);
 	}
 	
@@ -101,7 +127,8 @@ public class Book extends AbstractEntity{
 		result = prime * result + ((author == null) ? 0 : author.hashCode());
 		result = prime * result + ((language == null) ? 0 : language.hashCode());
 		result = prime * result + ((category == null) ? 0 : category.hashCode());
-		result = prime * result + amountInLibrary;
+		result = prime * result + ((description == null) ? 0 : description.hashCode());
+		result = prime * result + copiesInLibrary;
 		result = prime * result + currentlyBorrowed;
 		return result;
 	}

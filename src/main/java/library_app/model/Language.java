@@ -7,6 +7,11 @@ public class Language extends AbstractEntity{
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
+	public Language(long id, String languageName) {
+		super();
+		this.languageName = languageName;
+	}
 
 	public Language(String languageName) {
 		super();

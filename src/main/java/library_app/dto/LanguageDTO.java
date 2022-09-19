@@ -1,6 +1,6 @@
 package library_app.dto;
 
-public class LanguageDTO {
+public class LanguageDTO extends AbstractDTO{
 	private String languageName;
 
 	public String getLanguageName() {

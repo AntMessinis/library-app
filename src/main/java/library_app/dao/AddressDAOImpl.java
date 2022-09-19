@@ -11,7 +11,7 @@ import library_app.dao.dbutil.DBUtil;
 import library_app.model.Address;
 import library_app.model.Country;
 
-public class AddressDAOImpl implements IGenericDAO<Address>{
+public class AddressDAOImpl implements IAddressDAO{
 
 	@Override
 	public void insert(Address m) throws SQLException {
@@ -56,7 +56,7 @@ public class AddressDAOImpl implements IGenericDAO<Address>{
 
 	@Override
 	public void delete(Address m) throws SQLException {
-		String sql = "delete * from addresses where address.id=?";
+		String sql = "delete from addresses where address.id=?";
 		
 		try (Connection conn = DBUtil.openConnection();
 				PreparedStatement ps = conn.prepareStatement(sql)) {

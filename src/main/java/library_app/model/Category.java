@@ -13,6 +13,11 @@ public abstract class Category extends AbstractEntity{
 		super(id);
 		this.category = category;
 	}
+	
+	public Category(String category) {
+		super();
+		this.category = category;
+	}
 
 	public String getCategoryName() {
 		return category;

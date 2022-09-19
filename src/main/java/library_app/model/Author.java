@@ -15,6 +15,13 @@ public class Author extends AbstractEntity{
 		this.lastname = lastname;
 		this.countryOfOrigin = countryOfOrigin;
 	}
+	
+	public Author(String firstname, String lastname, Country countryOfOrigin) {
+		super();
+		this.firstname = firstname;
+		this.lastname = lastname;
+		this.countryOfOrigin = countryOfOrigin;
+	}
 
 
 

@@ -12,6 +12,10 @@ public class Country extends AbstractEntity{
 		this.name = name;
 	}
 	
+	public Country(String name) {
+		super();
+		this.name = name;
+	}
 	
 	public String getName() {
 		return name;

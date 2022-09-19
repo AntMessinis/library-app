@@ -6,6 +6,7 @@ public class BookDTO extends AbstractDTO{
 	private AuthorDTO author;
 	private LanguageDTO language;
 	private SubcategoryDTO category;
+	private String description;
 	
 	private int amountInLibrary;
 	private int currentlyBorrowed;
@@ -50,6 +51,12 @@ public class BookDTO extends AbstractDTO{
 	}
 	public void setCurrentlyBorrowed(int currentlyBorrowed) {
 		this.currentlyBorrowed = currentlyBorrowed;
+	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
 	}
 	
 	

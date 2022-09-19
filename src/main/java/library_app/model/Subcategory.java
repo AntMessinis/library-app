@@ -17,6 +17,11 @@ public class Subcategory extends Category{
 		super(id, category);
 		this.subcategoryName = subcategoryName;
 	}
+	
+	public Subcategory(String subcategoryName, String category) {
+		super(category);
+		this.subcategoryName = subcategoryName;
+	}
 
 	public String getSubcategoryName() {
 		return subcategoryName;
