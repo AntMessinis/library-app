@@ -1,27 +1,21 @@
 $(document).ready(function(){
-    
-    $('#titleSearchBtn').on('click', function(){
-        
-        getBookFromJSON($('#searchInput').val().trim())    
+    $("#isbnSearchBtn").on('click', function(){
+        getIsbnSearchResultsFromJSON($("#searchInput").val().trim())
     })
 });
 
-function getBookFromJSON(bookTitle){
-    
-    let xhr = new XMLHttpRequest()
+function getIsbnSearchResultsFromJSON(bookIsbn){
+    let xhr = new XMLHttpRequest();
 
-    xhr.open('GET',`/library-app/searchByTitle?title=${bookTitle}`, true)
+    xhr.open('GET', `/library-app/searchByIsbn?isbn=${bookIsbn}`, true);
     xhr.timeout = 10000;
     xhr.ontimeout = (e) => APIError()
-    
+
     xhr.onreadystatechange = function(){
-        
         if (xhr.readyState === 4){
-            
-            if (xhr.status === 200){
-                handleBookTitleSearchResults(JSON.parse(xhr.responseText))
-                
-            } else {
+            if(xhr.status === 200){
+                handleIsbnSearchResults(JSON.parse(xhr.responseText))
+            }else{
                 APIError()
             }
         }
@@ -29,11 +23,11 @@ function getBookFromJSON(bookTitle){
     xhr.send()
 }
 
-function handleBookTitleSearchResults(response){
+function handleIsbnSearchResults(response){
     let book = response;
-    if ($.isEmptyObject(response)){
-        $("#searchResults").html("<p>No book was found</p>");
-    } else {
+    if($.isEmptyObject(response)){
+        $("#searchResults").html("No book was found")
+    }else{
         let output = `<h1 class="display-1">${book.title}</h1>
         <div class="row mt-5">
           <div class="col-7">
@@ -59,5 +53,5 @@ function handleBookTitleSearchResults(response){
 }
 
 function APIError(){
-    $("#searchResults").html("Something Went Wrong!")
+    $("#searchResults").html("Something went wrong")
 }

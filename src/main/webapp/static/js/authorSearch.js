@@ -32,19 +32,13 @@ function getBookListFromJSON(author){
 function handleBookAuthorSearchResults(response){
     let books = response;
     
-    if (books.length < 1){
+    if ($.isEmptyObject(response)){
         $("#searchResults").html("<p>No book was found</p>")
     }else {
         let output = "<div class=row>"
         for (var book of books){
             output += `<div class="col-6">
-            <div class="card" style="width: 18rem;">
-            <img class="card-img-top" src="..." alt="Card image cap">
-            <div class="card-body">
-            <h5 class="card-title">${book.title}</h5>
-                <p class="card-text">${book.description}</p>
-            </div>
-            </div>` +"<img src=\"${pageContext.request.contextPath}/static/imgs/tumbnail.jpg\" alt=\"changedAgain\"></div>";
+            <h6 class="display-6">${book.title}</h6>` +'<img src="${pageContext.request.contextPath}/static/imgs/tumbnail.jpg" alt="changedAgain"></div>';
         }
         output += "</div>"
         $("#searchResults").html(output)

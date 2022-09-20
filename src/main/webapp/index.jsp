@@ -57,7 +57,6 @@
             <li><hr class="dropdown-divider"></li>
             <li><a type="button" id="authorSearchBtn" class="dropdown-item" >Author</a></li>
             <li><hr class="dropdown-divider"></li>
-            
             <li><a type="button" id="categorySearchBtn"  class="dropdown-item" >Category</a></li>
           </ul>
         </form>
@@ -69,8 +68,10 @@
       </div>
 
       <script src="${pageContext.request.contextPath}/static/js/jQuery.min.js?version=2"></script>
-      <script src="${pageContext.request.contextPath}/static/js/titleSearch.js?version=23" type="text/javascript"></script>
-      <script src="${pageContext.request.contextPath}/static/js/authorSearch.js?version=35" type="text/javascript"></script>
+      <script src="${pageContext.request.contextPath}/static/js/titleSearch.js?version=24" type="text/javascript"></script>
+      <script src="${pageContext.request.contextPath}/static/js/authorSearch.js?version=39" type="text/javascript"></script>
+      <script src="${pageContext.request.contextPath}/static/js/categorySearch.js?version=5" type="text/javascript"></script>
+      <script src="${pageContext.request.contextPath}/static/js/isbnSearch.js?version=2" type="text/javascript"></script> 
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
 </body>
 </html>
