@@ -92,18 +92,17 @@ public class BookDAOImpl implements IBookDAO{
 	}
 
 	@Override
-	public Book getInstanceByName(String title) throws SQLException {
+	public Book getInstanceByStrField(String fieldName, String value) throws SQLException {
 		String sql = "select * from books inner join authors on author=authors.id"
 				+ "	inner join countries on authors.country=countries.id"
 				+ "	inner join languages on books.language=languages.id"
 				+ "    inner join subcategories on books.category=subcategories.id"
 				+ "    inner join categories on subcategories.category=categories.id"
-				+ "    where title=?";
+				+ "    where " + fieldName +"=?";
 		Book book = new Book();
 		try (PreparedStatement ps = DBUtil.openConnection().prepareStatement(sql)){
 			
-			ps.setString(1, title);
-			
+			ps.setString(1, value);
 			try (ResultSet rs = ps.executeQuery()){
 				if(rs.next()) {
 					book.setId(rs.getLong(1));
@@ -147,7 +146,11 @@ public class BookDAOImpl implements IBookDAO{
 
 	@Override
 	public List<Book> getAll() throws SQLException {
-		String sql = "select * from books";
+		String sql = "select * from books inner join authors on author=authors.id"
+				+ "	inner join countries on authors.country=countries.id"
+				+ "	inner join languages on books.language=languages.id"
+				+ "    inner join subcategories on books.category=subcategories.id"
+				+ "    inner join categories on subcategories.category=categories.id";
 		List<Book> books = new ArrayList<>();
 		try (ResultSet rs = DBUtil.openConnection().prepareStatement(sql).executeQuery()){
 			while (rs.next()) {
@@ -167,6 +170,44 @@ public class BookDAOImpl implements IBookDAO{
 			}
 			return books;
 			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw e;
+		}
+	}
+
+	@Override
+	public List<Book> getListByField(String fieldName, String value) throws SQLException {
+		String sql = "select * from books inner join authors on author=authors.id"
+				+ "	inner join countries on authors.country=countries.id"
+				+ "	inner join languages on books.language=languages.id"
+				+ "   inner join subcategories on books.category=subcategories.id"
+				+ "   inner join categories on subcategories.category=categories.id"
+				+ "	where " + fieldName +"=?";
+		List<Book> books = new ArrayList<>();
+		try (PreparedStatement ps = DBUtil.openConnection().prepareStatement(sql)){
+			ps.setString(1, value);
+			try(ResultSet rs = ps.executeQuery()) {
+				while (rs.next()) {
+					Book bookToList = new Book(
+							rs.getLong(1),
+							rs.getString(2),
+							rs.getString(3),
+							new Author(rs.getLong(10), rs.getString(11), rs.getString(12), new Country(rs.getLong(13), rs.getString(15))),
+							new Language(rs.getLong(16), rs.getString(17)),
+							new Subcategory(	rs.getLong(18), 	rs.getString(19), rs.getString(22)),
+							rs.getString(7),
+							rs.getInt(8),
+							rs.getInt(9)
+					);
+					
+					books.add(bookToList);
+				}
+				return books;
+			} catch (SQLException e) {
+				e.printStackTrace();
+				throw e;
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw e;

@@ -7,23 +7,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
-
 /**
- * Servlet implementation class CountryController
+ * Servlet implementation class AboutUsController
  */
-@WebServlet("/country")
-public class CountryController extends HttpServlet {
+@WebServlet("/about")
+public class AboutUsController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
-	
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+       
+   
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html; charset=UTF-8");
-		request.getRequestDispatcher("index.jsp");
+		request.getRequestDispatcher("jsps/about-us.jsp").forward(request, response);
 	}
 
 	

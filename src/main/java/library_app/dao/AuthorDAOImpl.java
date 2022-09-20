@@ -15,9 +15,9 @@ public class AuthorDAOImpl implements IAuthorDAO{
 
 	@Override
 	public void insert(Author m) throws SQLException {
-		String sql = "insert into authors (author_firstname, author_lastname, origin_country) values (?, ?, (select id from countries where country_name=?)) on duplicate key update id=id";
-		try	(Connection conn = DBUtil.openConnection();
-				PreparedStatement ps = conn.prepareStatement(sql)){
+		String sql = "insert into authors (author_firstname, author_lastname, origin_country) "
+				+ "values (?, ?, (select id from countries where country_name=?)) on duplicate key update id=id";
+		try (PreparedStatement ps = DBUtil.openConnection().prepareStatement(sql)){
 			
 			ps.setString(1, m.getFirstname());
 			ps.setString(2, m.getLastname());
@@ -35,8 +35,7 @@ public class AuthorDAOImpl implements IAuthorDAO{
 	@Override
 	public void update(Author m) throws SQLException {
 		String sql = "update authors set author_firstname=?, author_lastname=?, country=? where id=?";
-		try	(Connection conn = DBUtil.openConnection();
-				PreparedStatement ps = conn.prepareStatement(sql)){
+		try	(PreparedStatement ps = DBUtil.openConnection().prepareStatement(sql)){
 			
 			ps.setString(1, m.getFirstname());
 			ps.setString(2, m.getLastname());
@@ -55,8 +54,7 @@ public class AuthorDAOImpl implements IAuthorDAO{
 	@Override
 	public void delete(Author m) throws SQLException {
 		String sql = "delete from authors where id=?";
-		try	(Connection conn = DBUtil.openConnection();
-				PreparedStatement ps = conn.prepareStatement(sql)){
+		try(PreparedStatement ps = DBUtil.openConnection().prepareStatement(sql)){
 			ps.setLong(1, m.getId());
 			
 			ps.executeUpdate();
@@ -69,11 +67,11 @@ public class AuthorDAOImpl implements IAuthorDAO{
 	}
 
 	@Override
-	public Author getInstanceByName(String lastname) throws SQLException {
-		String sql = "select * from authors inner join countries on country=countries.id where author_lastname=?";
+	public Author getInstanceByStrField(String fieldName, String value) throws SQLException {
+		String sql = "select * from authors inner join countries on country=countries.id where "+ fieldName +"=?";
 		Author author = new Author();
 		try	(PreparedStatement ps = DBUtil.openConnection().prepareStatement(sql)){
-			ps.setString(1, lastname);
+			ps.setString(1, value);
 			
 			try(ResultSet rs = ps.executeQuery()){
 				if(rs.next()) {
@@ -99,13 +97,36 @@ public class AuthorDAOImpl implements IAuthorDAO{
 	@Override
 	public List<Author> getAll() throws SQLException {
 		
-		String sql = "select * from authors inner join countries on coyntry=countries.id";
+		String sql = "select * from authors inner join countries on country=countries.id";
 		List<Author> authors = new ArrayList<>();
 		
-		try	(Connection conn = DBUtil.openConnection();
-				PreparedStatement ps = conn.prepareStatement(sql)){
+		try(ResultSet rs = DBUtil.openConnection().prepareStatement(sql).executeQuery()){
 			
-			try (ResultSet rs = ps.executeQuery()){
+			while (rs.next()) {
+				authors.add(new Author(
+						rs.getLong(1),
+						rs.getString(2),
+						rs.getString(3),
+						new Country(rs.getLong(5), rs.getString(6))
+				));
+			}
+			return authors;	
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw e;
+		}
+	}
+
+	@Override
+	public List<Author> getListByField(String fieldName, String value) throws SQLException {
+		String sql = "select * from authors inner join countries on " + fieldName + "=?";
+		List<Author> authors = new ArrayList<>();
+		
+		try	(PreparedStatement ps = DBUtil.openConnection().prepareStatement(sql)){
+			ps.setString(1, value);
+			
+			try(ResultSet rs = ps.executeQuery()){
 				while (rs.next()) {
 					authors.add(new Author(
 							rs.getLong(1),
@@ -114,17 +135,13 @@ public class AuthorDAOImpl implements IAuthorDAO{
 							new Country(rs.getLong(5), rs.getString(6))
 					));
 				}
-				return authors;
+				return authors;	
 				
 			} catch (SQLException e) {
 				e.printStackTrace();
 				throw e;
-			}
 			
-		} catch (SQLException e) {
-			e.printStackTrace();
-			throw e;
+			}
 		}
 	}
-
 }

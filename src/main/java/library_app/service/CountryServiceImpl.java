@@ -42,7 +42,7 @@ public class CountryServiceImpl implements ICountryService{
 	@Override
 	public Country get(CountryDTO d) throws SQLException {
 		try {
-			Country getCountry = dao.getInstanceByName(d.getCountryName());
+			Country getCountry = dao.getInstanceByStrField("country_name",d.getCountryName());
 			return getCountry;
 		} catch (SQLException e) {
 			e.printStackTrace();

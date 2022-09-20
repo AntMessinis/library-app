@@ -44,7 +44,7 @@ public class BookServiceImpl implements IBookService{
 	@Override
 	public Book get(BookDTO d) throws SQLException {
 		try{
-			return dao.getInstanceByName(d.getTitle());
+			return dao.getInstanceByStrField("title",d.getTitle());
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw e;
@@ -66,6 +66,46 @@ public class BookServiceImpl implements IBookService{
 	public List<Book> getList() throws SQLException {
 		try{
 			return dao.getAll();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw e;
+		}
+	}
+	
+	@Override
+	public Book getBookByISBN(BookDTO dto) throws SQLException {
+		try{
+			return dao.getInstanceByStrField("books.isbn", dto.getIsbn());
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw e;
+		}
+	}
+
+	@Override
+	public List<Book> getBooksByAuthor(BookDTO dto) throws SQLException {
+		try{
+			return dao.getListByField("authors.lastname", dto.getAuthor().getLastname());
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw e;
+		}
+	}
+
+	@Override
+	public List<Book> getBooksByKeyword(String keyword) throws SQLException {
+		try{
+			return dao.getListByField("title", keyword);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw e;
+		}
+	}
+
+	@Override
+	public List<Book> getBooksByCategory(BookDTO dto) throws SQLException {
+		try{
+			return dao.getListByField("subcategories.subcategory_name", dto.getCategory().getSubcategoryName());
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw e;
@@ -101,4 +141,7 @@ public class BookServiceImpl implements IBookService{
 		
 		return book;
 	}
+
+
+
 }

@@ -16,8 +16,7 @@ public class SubcategoryDAOImpl implements ISubcategoryDAO{
 	public void insert(Subcategory m) throws SQLException {
 		String sql = "insert into Subcategories (subcategory_name, category) values (?, (select id from categories where category_name=?)";
 		
-		try (Connection conn = DBUtil.openConnection();
-				PreparedStatement ps = conn.prepareStatement(sql)){
+		try (PreparedStatement ps = DBUtil.openConnection().prepareStatement(sql)){
 			ps.setString(1, m.getSubcategoryName());
 			ps.setString(2, m.getCategoryName());
 			
@@ -33,8 +32,7 @@ public class SubcategoryDAOImpl implements ISubcategoryDAO{
 	public void update(Subcategory m) throws SQLException {
 		String sql = "update subcategories set subcategory_name where id=?";
 		
-		try (Connection conn = DBUtil.openConnection();
-				PreparedStatement ps = conn.prepareStatement(sql)){
+		try (PreparedStatement ps = DBUtil.openConnection().prepareStatement(sql)){
 			
 			ps.setLong(1, m.getId());
 			ps.executeUpdate();
@@ -48,8 +46,7 @@ public class SubcategoryDAOImpl implements ISubcategoryDAO{
 	@Override
 	public void delete(Subcategory m) throws SQLException {
 		String sql = "delete from subcategories where id=?";
-		try (Connection conn = DBUtil.openConnection();
-				PreparedStatement ps = conn.prepareStatement(sql)){
+		try (PreparedStatement ps = DBUtil.openConnection().prepareStatement(sql)){
 			
 			ps.setLong(1, m.getId());
 			
@@ -63,14 +60,13 @@ public class SubcategoryDAOImpl implements ISubcategoryDAO{
 	}
 
 	@Override
-	public Subcategory getInstanceByName(String name) throws SQLException {
-		String sql = "select * from subcategories inner join categories where category=categories.id where subcategory_name=?";
+	public Subcategory getInstanceByStrField(String fieldName, String value) throws SQLException {
+		String sql = "select * from subcategories inner join categories where category=categories.id where ?=?";
 		Subcategory subCat = new Subcategory();
 		
-		try (Connection conn = DBUtil.openConnection();
-				PreparedStatement ps = conn.prepareStatement(sql)){
-			ps.setString(1, name);
-			
+		try (PreparedStatement ps = DBUtil.openConnection().prepareStatement(sql)){
+			ps.setString(1, fieldName);
+			ps.setString(2, value);
 			try(ResultSet rs = ps.executeQuery()){
 				if (rs.next()) {
 					subCat.setId(rs.getLong(1));
@@ -93,33 +89,51 @@ public class SubcategoryDAOImpl implements ISubcategoryDAO{
 
 	@Override
 	public List<Subcategory> getAll() throws SQLException {
-		String sql = "select * from subcategories inner join categories where category=categories.id";
+		String sql = "select * from subcategories inner join categories on category=categories.id";
 		List<Subcategory> subcategories = new ArrayList<>();
 		
-		try (Connection conn = DBUtil.openConnection();
-				PreparedStatement ps = conn.prepareStatement(sql)){
-			
-			try(ResultSet rs = ps.executeQuery()){
+		try (ResultSet rs = DBUtil.openConnection().prepareStatement(sql).executeQuery()){
+		
+			while (rs.next()) {
+				Subcategory subCat = new Subcategory();
+				subCat.setId(rs.getLong(1));
+				subCat.setSubcategoryName(rs.getString(2));
+				subCat.setCategoryName(rs.getString(5));
+					
+				subcategories.add(subCat);
+			}
 				
+			return subcategories;
+				
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw e;
+		}
+	}
+
+	@Override
+	public List<Subcategory> getListByField(String fieldName, String value) throws SQLException {
+		String sql = "select * from subcategories inner join categories on category=categories.id where ?=?";
+		List<Subcategory> subcategories = new ArrayList<>();
+		try (PreparedStatement ps = DBUtil.openConnection().prepareStatement(sql)){
+			ps.setString(1, fieldName);
+			ps.setString(2, value);
+			try(ResultSet rs = ps.executeQuery()){
 				while (rs.next()) {
 					Subcategory subCat = new Subcategory();
 					subCat.setId(rs.getLong(1));
 					subCat.setSubcategoryName(rs.getString(2));
 					subCat.setCategoryName(rs.getString(5));
-					
+						
 					subcategories.add(subCat);
 				}
-				
+					
 				return subcategories;
-				
+					
 			} catch (SQLException e) {
 				e.printStackTrace();
 				throw e;
 			}
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-			throw e;
 		}
 	}
 	
