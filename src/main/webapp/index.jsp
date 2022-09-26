@@ -41,6 +41,7 @@
               <input class="form-control me-2" type="password" placeholder="Password" placeholder="Password">
               <button class="btn btn-primary" type="submit">Login</button>
             </form>
+            <a href="${pageContext.request.contextPath}/register" class="text-white nav-link">Register</a>
           </div>
         </div>
       </nav>
