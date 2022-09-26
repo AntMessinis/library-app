@@ -47,7 +47,7 @@
   </nav>
     
     <div class="container-xl mt-3">
-      <h1 class="display-1 mt-3">Privacy Policy for CF Libra</h1>
+      <h1 class="display-3 mt-3">Privacy Policy for CF Libra</h1>
       <p class="mt-3">At library-app, accessible from www.llibra.cf, one of our main priorities is the privacy of our visitors. This Privacy Policy document contains types of information that is collected and recorded by library-app and how we use it.
 
         If you have additional questions or require more information about our Privacy Policy, do not hesitate to contact us.

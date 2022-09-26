@@ -65,7 +65,37 @@ public class AddressDAOImpl implements IAddressDAO{
 			e.printStackTrace();
 			throw e;
 		}
+	}
+	
+	@Override
+	public Address getInstanceById(long id) throws SQLException {
+		String sql = "select * from addresses inner join countries on country=countries.id where id=?";
 		
+		Address address = new Address();
+		
+		try (PreparedStatement ps = DBUtil.openConnection().prepareStatement(sql)) {
+			ps.setLong(1, id);
+			
+			try (ResultSet rs = ps.executeQuery()){
+				if (rs.next()) {
+					address.setId(rs.getLong(1));
+					address.setAddressName(rs.getString(2));
+					address.setPostalCode(rs.getString(3));
+					address.setCity(rs.getString(4));
+
+					address.setCountry(new Country(rs.getLong(6), rs.getString(7)));
+				}
+				return address;
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+				throw e;
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw e;
+		}
 	}
 
 	@Override
@@ -135,7 +165,7 @@ public class AddressDAOImpl implements IAddressDAO{
 
 	@Override
 	public List<Address> getListByField(String fieldName, String value) throws SQLException {
-String sql = "select * from addresses inner join countries on " + fieldName +"=?";
+		String sql = "select * from addresses inner join countries on " + fieldName +"=?";
 		
 		List<Address> addresses = new ArrayList<>();
 		
@@ -166,4 +196,6 @@ String sql = "select * from addresses inner join countries on " + fieldName +"=?
 			throw e;
 		}
 	}
+
+	
 }

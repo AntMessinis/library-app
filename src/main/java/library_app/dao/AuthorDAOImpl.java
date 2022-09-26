@@ -63,8 +63,36 @@ public class AuthorDAOImpl implements IAuthorDAO{
 			e.printStackTrace();
 			throw e;
 		}
-		
 	}
+	
+	@Override
+	public Author getInstanceById(long id) throws SQLException {
+		String sql = "select * from authors inner join countries on country=countries.id where id=?";
+		Author author = new Author();
+		try	(PreparedStatement ps = DBUtil.openConnection().prepareStatement(sql)){
+			ps.setLong(1, id);
+			
+			try(ResultSet rs = ps.executeQuery()){
+				if(rs.next()) {
+					
+					author.setId(rs.getLong(1));
+					author.setFirstname(rs.getString(2));
+					author.setLastname(rs.getString(3));
+					
+					author.setCountryOfOrigin(new Country(rs.getLong(4),rs.getString(5)));
+				}
+				return author;
+			} catch (SQLException e) {
+				e.printStackTrace();
+				throw e;
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw e;
+		}
+	}
+
 
 	@Override
 	public Author getInstanceByStrField(String fieldName, String value) throws SQLException {
@@ -141,7 +169,9 @@ public class AuthorDAOImpl implements IAuthorDAO{
 				e.printStackTrace();
 				throw e;
 			
+				}
 			}
 		}
 	}
-}
+
+	

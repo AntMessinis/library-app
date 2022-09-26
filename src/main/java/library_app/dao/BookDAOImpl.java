@@ -91,6 +91,60 @@ public class BookDAOImpl implements IBookDAO{
 		
 	}
 
+	
+	@Override
+	public Book getInstanceById(long id) throws SQLException {
+		String sql = "select * from books inner join authors on author=authors.id"
+				+ "	inner join countries on authors.country=countries.id"
+				+ "	inner join languages on books.language=languages.id"
+				+ "    inner join subcategories on books.category=subcategories.id"
+				+ "    inner join categories on subcategories.category=categories.id"
+				+ "    where id=?";
+		Book book = new Book();
+		try (PreparedStatement ps = DBUtil.openConnection().prepareStatement(sql)){
+			
+			ps.setLong(1, id);
+			try (ResultSet rs = ps.executeQuery()){
+				if(rs.next()) {
+					book.setId(rs.getLong(1));
+					book.setTitle(rs.getString(2));
+					book.setIsbn(rs.getString(3));
+					
+					book.setCopiesInLibrary(rs.getInt(8));
+					book.setCurrentlyBorrowed(9);
+					
+					book.setAuthor(new Author(
+							rs.getLong(10),
+							rs.getString(11),
+							rs.getString(12),
+							new Country(rs.getLong(13), rs.getString(15))	
+					));
+					
+					book.setLanguage(new Language(
+							rs.getLong(16),
+							rs.getString(17)
+					));
+					
+					book.setCategory(new Subcategory(
+							rs.getLong(18),
+							rs.getString(19),
+							rs.getString(22))
+					);
+					book.setDescription(rs.getString(7));
+				}
+				
+				return book;
+			} catch (SQLException e) {
+				e.printStackTrace();
+				throw e;
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw e;
+		}
+	}
+	
 	@Override
 	public Book getInstanceByStrField(String fieldName, String value) throws SQLException {
 		String sql = "select * from books inner join authors on author=authors.id"
@@ -213,4 +267,6 @@ public class BookDAOImpl implements IBookDAO{
 			throw e;
 		}
 	}
+
+	
 }

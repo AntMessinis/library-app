@@ -21,8 +21,8 @@ public class User extends AbstractEntity{
 		// TODO Auto-generated constructor stub
 	}
 
-	public User(long id, String username, String password, String email, String firstname, String lastname, Address address,
-			String phoneNumber, Date birthdate, boolean isAdmin) {
+	public User(long id, String firstname, String lastname, Address address, String phoneNumber, String email, String username, String password,  
+			Date birthdate, boolean isAdmin) {
 		super(id);
 		this.username = username;
 		this.password = password;

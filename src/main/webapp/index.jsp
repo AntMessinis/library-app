@@ -48,7 +48,7 @@
       <img src="../webapp/" alt="">
       <div class="container-xl mt-5">
         <form class="d-flex">
-          <input id="searchInput" class="form-control me-sm-2" type="text" placeholder="Search by Title, ISBN, Author or Category...">
+          <input id="searchInput" class="form-control me-sm-2" type="text" placeholder="Search books by Title, ISBN, Author or Category...">
           <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Search by</button>
           <ul class="dropdown-menu">
             <li><a type="button" id="titleSearchBtn" class="dropdown-item">Title</a></li>

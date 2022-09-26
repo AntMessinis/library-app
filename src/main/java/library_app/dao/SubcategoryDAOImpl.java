@@ -136,6 +136,12 @@ public class SubcategoryDAOImpl implements ISubcategoryDAO{
 			}
 		}
 	}
+
+	@Override
+	public Subcategory getInstanceById(long id) throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 
 }

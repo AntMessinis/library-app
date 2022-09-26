@@ -53,7 +53,32 @@ public class LanguagesDAOImpl implements ILanguagesDAO{
 			e.printStackTrace();
 			throw e;
 		}
-		
+	}
+	
+	@Override
+	public Language getInstanceById(long id) throws SQLException {
+		String sql = "select * from languages where id=?";
+		Language lang = new Language();
+		try (PreparedStatement ps = DBUtil.openConnection().prepareStatement(sql)){
+			
+			ps.setLong(1, id);
+			
+			try (ResultSet rs = ps.executeQuery()){
+				
+				if (rs.next()) {
+					lang.setId(rs.getLong(1));
+					lang.setLanguageName(rs.getString(2));
+				}
+				return lang;
+			} catch (SQLException e) {
+				e.printStackTrace();
+				throw e;
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw e;
+		}
 	}
 
 	@Override
@@ -132,5 +157,7 @@ public class LanguagesDAOImpl implements ILanguagesDAO{
 			throw e;
 		}
 	}
+
+	
 
 }

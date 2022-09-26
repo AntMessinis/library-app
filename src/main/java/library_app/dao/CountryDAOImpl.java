@@ -59,6 +59,31 @@ public class CountryDAOImpl implements ICountryDAO{
 		}
 		
 	}
+	
+	@Override
+	public Country getInstanceById(long id) throws SQLException {
+		String sql = "select * from countries where id=?";
+		Country country = new Country();
+		try(PreparedStatement ps = DBUtil.openConnection().prepareStatement(sql)){
+			ps.setLong(1, id);
+			try (ResultSet rs = ps.executeQuery()) {
+				if (rs.next()) {
+					country.setId(rs.getLong(1));
+					country.setName(rs.getString(2));
+				}
+				
+				return country;
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+				throw e;
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw e;
+		}
+	}
 
 	@Override
 	public Country getInstanceByStrField(String fieldName, String value) throws SQLException {
@@ -121,6 +146,8 @@ public class CountryDAOImpl implements ICountryDAO{
 			}
 		}
 	}
+
+	
 	
 	
 
