@@ -26,7 +26,7 @@ public class UserDAOImpl implements IUserDAO{
 			ps.setString(5, m.getEmail());
 			ps.setString(6, m.getUsername());
 			ps.setString(7,m.getPassword());
-			ps.setDate(8, (Date) m.getBirthdate());
+			ps.setDate(8, new Date( m.getBirthdate().getTime())); // Converting Java.Util.Date to Java.SQL.Date and set it to ps
 			ps.setBoolean(9, m.isAdmin());
 			
 			ps.executeUpdate();

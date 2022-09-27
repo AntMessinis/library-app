@@ -49,7 +49,7 @@
   <div class="container-sm mt-5">
     <h2 class="display-2">Become a Member</h2>
     <span id="feedback"></span>
-    <form action="" method="post">
+    <form action="" method="post" id="registrationForm">
         <div class="form-group row mt-3">
             <div class="col-md-6 mt-3">
             <label for="username" class="form-label">Username</label>
@@ -126,6 +126,6 @@
 
   
   <script src="${pageContext.request.contextPath}/static/js/jQuery.min.js?version=2"></script>
-  <script src="${pageContext.request.contextPath}/static/js/registration.js?version=26" type="text/javascript"></script>
+  <script src="${pageContext.request.contextPath}/static/js/registration.js?version=45" type="text/javascript"></script>
 </body>
 </html>

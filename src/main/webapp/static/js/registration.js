@@ -1,5 +1,9 @@
 $(document).ready(function (){
     getCountryChoices();
+    $('#registrationForm').on('submit', function (e){
+        e.preventDefault();
+    });
+
     $('#registrationButton').on('click', function (){
         postJSON();
     });
@@ -51,25 +55,25 @@ function postJSON(){
     let address = $('#address').val().trim();
     let postalCode = $('#postalCode').val().trim();
     let city = $('#city').val().trim();
-    let country = $('#country').val();
+    let country = $('#countrySelect option:selected').text();
     let phoneNumber = $('#phoneNumber').val().trim();
-    let birthDate = $('#birthDate').val();
+    let birthdate = $('#birthDate').val();
 
     // Create an XHR object
-    //let xhr = new XMLHttpRequest();
+    let xhr = new XMLHttpRequest();
 
     // Open Connection
-    //xhr.open('POST', 'library-app/register', true);
+    xhr.open('POST', 'registration', true);
 
     // Set timeout
-    //xhr.timeout = 10000;
-    //xhr.ontimeout = (e) => APIError();
+    xhr.timeout = 10000;
+    xhr.ontimeout = (e) => APIError();
 
     // Set Content type to JSON
-    //xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+    xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
 
     // Check connection
-    /*xhr.onreadystatechange = function (){
+    xhr.onreadystatechange = function (){
         if(xhr.readyState === 4){
             if(xhr.status === 200){
                 console.log("status OK")
@@ -78,35 +82,39 @@ function postJSON(){
 				console.log("status not OK")
                 APIError();  
             }
-        }*/
+        }
     // Create JSON string with data
     var data = JSON.stringify({
-        "username": username.value,
-        "password": password.value,
-        "email": email.value,
-        "firstname": firstname.value,
-        "lastname": lastname.value,
-        "address": address.value,
-        "postalCode": postalCode.value,
-        "city": city.value,
-        "country": country.value,
-        "phoneNumber": phoneNumber.value,
-        "birthDate": birthDate.value,
-        "isAdmin": false
+        "username": username,
+        "password": password,
+        "email": email,
+        "firstname": firstname,
+        "lastname": lastname,
+        "address": {
+            "addressName": address,
+            "postalCode": postalCode,
+            "city": city,
+            "country":{
+                'countryName':country
+            } 
+        },
+        "phoneNumber": phoneNumber,
+        "birthdate": birthdate,
+        "isadmin": false
      });
     
-     $.ajax({
-        url: 'library-app/register',
+     /*$.ajax({
+        url: 'register',
         dataType: 'json',
         contentType: 'application/json',
         type: 'POST',
         async: true,
         data: data,
         failure: APIError()
-        
-    });
+    });*/
+
     // Send JSON string
-    //xhr.send(data);    
+    xhr.send(data);    
 }  
 
 

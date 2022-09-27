@@ -11,8 +11,9 @@ public class UserDTO extends AbstractDTO{
 	private String lastname;
 	private AddressDTO address;
 	private String phoneNumber;
-	private Date birthdate;
-	private boolean is_admin;
+	private Date birthDate;
+	private boolean isAdmin;
+	
 	public String getUsername() {
 		return username;
 	}
@@ -56,16 +57,16 @@ public class UserDTO extends AbstractDTO{
 		this.phoneNumber = phoneNumber;
 	}
 	public Date getBirthdate() {
-		return birthdate;
+		return birthDate;
 	}
-	public void setBirthdate(Date birthdate) {
-		this.birthdate = birthdate;
+	public void setBirthdate(Date birthDate) {
+		this.birthDate = birthDate;
 	}
 	public boolean isAdmin() {
-		return is_admin;
+		return isAdmin;
 	}
-	public void setISAdmin(boolean is_admin) {
-		this.is_admin = is_admin;
+	public void setISAdmin(boolean isAdmin) {
+		this.isAdmin = isAdmin;
 	}
 	
 	

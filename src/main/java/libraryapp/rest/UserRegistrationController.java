@@ -3,6 +3,8 @@ package libraryapp.rest;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,24 +17,21 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import libraryapp.dao.IUserDAO;
 import libraryapp.dao.UserDAOImpl;
 import libraryapp.dto.UserDTO;
-import libraryapp.model.User;
 import libraryapp.service.IUserService;
 import libraryapp.service.UserServiceImpl;
 
-
-@WebServlet("/register")
-public class RegisterUserController extends HttpServlet {
+/**
+ * Servlet implementation class UserRegistrationController
+ */
+@WebServlet("/registration")
+public class UserRegistrationController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    private final IUserDAO dao = new UserDAOImpl();
-    private final IUserService userService = new UserServiceImpl(dao);
-    
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setContentType("text/html; charset=UTF-8");
-		request.getRequestDispatcher("jsps/registration.jsp").forward(request, response);
-	}
-
 	
+    private static final IUserDAO DAO  = new UserDAOImpl();
+    private static final IUserService SERVICE = new UserServiceImpl(DAO);
+   
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		StringBuffer jsonString = new StringBuffer();
 		
 		String jsonLine = null;
@@ -46,13 +45,16 @@ public class RegisterUserController extends HttpServlet {
 		}
 		
 		ObjectMapper mapper = new ObjectMapper();
+		DateFormat df = new SimpleDateFormat("yyyy-mm-dd");
+		mapper.setDateFormat(df);
 		try {
 			UserDTO user = mapper.readValue(jsonString.toString(), UserDTO.class);
-			userService.add(user);
+			SERVICE.add(user);
 		} catch(SQLException e) {
 			e.printStackTrace();
 		}
 		
 	}
+	
 
 }
