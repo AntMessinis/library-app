@@ -35,9 +35,11 @@ public class CountryListController extends HttpServlet {
 		try {
 			List<Country> countries = countryService.getList();
 			if(countries.size() > 0) {
+				
 				ObjectMapper mapper = new ObjectMapper();
 				jsonString = mapper.writeValueAsString(countries);
 				response.getWriter().write(jsonString);
+				
 			} else {
 				response.getWriter().write("{}");
 			}

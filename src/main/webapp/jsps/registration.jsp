@@ -46,7 +46,7 @@
         </div>
       </nav>
 
-  <div class="container-sm">
+  <div class="container-sm mt-5">
     <h2 class="display-2">Become a Member</h2>
     <span id="feedback"></span>
     <form action="" method="post">
@@ -104,9 +104,19 @@
                 </select>
               </div>
         </div>
+        <div class="row mt-3">
+          <div class="col-md-3">
+            <label for="phoneNumber" class="form-label">Phone Number</label>
+            <input type="text" class="form-control" name="phoneNumber" id="phoneNumber" placeholder="+30 6990011222">
+          </div>
+          <div class="col-md-3">
+            <label for="birthDate" class="form-label">Date of Birth</label>
+            <input type="date" name="birthDate" id="birthDate" class="form-control">
+          </div>
+        </div>
         <div class="form-group row mt-3">
             <div class="col-md-3">
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" id="registrationButton" class="btn btn-primary">Submit</button>
                 <a role="button" class="btn btn-outline-primary" href="${pageContext.request.contextPath}/">Cancel</a>
             </div>
             
@@ -116,6 +126,6 @@
 
   
   <script src="${pageContext.request.contextPath}/static/js/jQuery.min.js?version=2"></script>
-      <script src="${pageContext.request.contextPath}/static/js/registrationCountry.js?version=1" type="text/javascript"></script>
+  <script src="${pageContext.request.contextPath}/static/js/registration.js?version=26" type="text/javascript"></script>
 </body>
 </html>
