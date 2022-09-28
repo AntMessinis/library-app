@@ -47,7 +47,7 @@
       </nav>
 
       <img src="../webapp/" alt="">
-      <div class="container-xl mt-5">
+      <div class="container-xxl mt-5">
         <form class="d-flex">
           <input id="searchInput" class="form-control me-sm-2" type="text" placeholder="Search books by Title, ISBN, Author or Category...">
           <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Search by</button>
@@ -69,9 +69,9 @@
       </div>
 
       <script src="${pageContext.request.contextPath}/static/js/jQuery.min.js?version=2"></script>
-      <script src="${pageContext.request.contextPath}/static/js/titleSearch.js?version=24" type="text/javascript"></script>
+      <script src="${pageContext.request.contextPath}/static/js/titleSearch.js?version=27" type="text/javascript"></script>
       <script src="${pageContext.request.contextPath}/static/js/authorSearch.js?version=39" type="text/javascript"></script>
-      <script src="${pageContext.request.contextPath}/static/js/categorySearch.js?version=5" type="text/javascript"></script>
+      <script src="${pageContext.request.contextPath}/static/js/categorySearch.js?version=28" type="text/javascript"></script>
       <script src="${pageContext.request.contextPath}/static/js/isbnSearch.js?version=2" type="text/javascript"></script> 
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
 </body>

@@ -77,6 +77,8 @@ function postJSON(){
         if(xhr.readyState === 4){
             if(xhr.status === 200){
                 console.log("status OK")
+                $("#feedback").html('<p class="text-success">User registered</p>');
+                resetFields();
         };
             }else {
 				console.log("status not OK")
@@ -115,8 +117,11 @@ function postJSON(){
 
     // Send JSON string
     xhr.send(data);    
-}  
+} 
 
+function resetFields(){
+    $('#registrationForm :input').val('');
+}
 
 function APIError(){
     $("#feedback").html('<p class="text-danger">Something went wrong, the page might not work as intended</p>');

@@ -126,6 +126,6 @@
 
   
   <script src="${pageContext.request.contextPath}/static/js/jQuery.min.js?version=2"></script>
-  <script src="${pageContext.request.contextPath}/static/js/registration.js?version=45" type="text/javascript"></script>
+  <script src="${pageContext.request.contextPath}/static/js/registration.js?version=48" type="text/javascript"></script>
 </body>
 </html>

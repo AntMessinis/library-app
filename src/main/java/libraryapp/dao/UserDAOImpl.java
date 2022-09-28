@@ -1,5 +1,6 @@
 package libraryapp.dao;
 
+import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,20 +17,38 @@ public class UserDAOImpl implements IUserDAO{
 
 	@Override
 	public void insert(User m) throws SQLException {
-		String sql = "insert into users (firstname, lastname, address, phone_number, email, username, password, birthdate, is_admin) "
-				+ "values (?,?,(select id from addresses where address_name=?),?,?,?,?,?,?)";
-		try (PreparedStatement ps = DBUtil.openConnection().prepareStatement(sql)) {
-			ps.setString(1, m.getFirstname());
-			ps.setString(2, m.getLastname());
-			ps.setString(3, m.getAddress().getAddressName());
-			ps.setString(4, m.getPhoneNumber());
-			ps.setString(5, m.getEmail());
-			ps.setString(6, m.getUsername());
-			ps.setString(7,m.getPassword());
-			ps.setDate(8, new Date( m.getBirthdate().getTime())); // Converting Java.Util.Date to Java.SQL.Date and set it to ps
-			ps.setBoolean(9, m.isAdmin());
+		String sqlAddress = "insert into addresses (address_name, postal_code, city, country) values (?,?,?, (select id from countries where country_name=?)) on duplicate key update id=id";
+		String sqlUser = "insert into users (firstname, lastname, address, phone_number, email, username, password, birthdate, is_admin) "
+				+ "values (?,?,(select id from addresses where address_name=?),?,?,?,?,?,?) on duplicate key update id=id";
+		try (
+				Connection conn = DBUtil.openConnection();
+				PreparedStatement psAddress = conn.prepareStatement(sqlAddress);
+				PreparedStatement psUser = conn.prepareStatement(sqlUser)
+				) {
+			// New Address Details
+			psAddress.setString(1, m.getAddress().getAddressName());
+			psAddress.setString(2, m.getAddress().getPostalCode());
+			psAddress.setString(3, m.getAddress().getCity());
+			psAddress.setString(4, m.getAddress().getCountry().getName());
 			
-			ps.executeUpdate();
+			psAddress.executeUpdate();
+			
+			// New User Details
+			psUser.setString(1, m.getFirstname());
+			psUser.setString(2, m.getLastname());
+			psUser.setString(3, m.getAddress().getAddressName());
+			psUser.setString(4, m.getPhoneNumber());
+			psUser.setString(5, m.getEmail());
+			psUser.setString(6, m.getUsername());
+			psUser.setString(7,m.getPassword());
+			psUser.setDate(8, new Date( m.getBirthdate().getTime())); // Converting Java.Util.Date to Java.SQL.Date and set it to ps
+			psUser.setBoolean(9, m.isAdmin());
+			
+			psUser.executeUpdate();
+			
+			// Transaction commit
+			conn.commit();
+			
 		}catch (SQLException e) {
 			e.printStackTrace();
 			throw e;
@@ -39,21 +58,39 @@ public class UserDAOImpl implements IUserDAO{
 
 	@Override
 	public void update(User m) throws SQLException {
-		String sql = "update user set firstname=?, lastname=?, address=(select id from addresses where address_name=?), "
+		String sqlAddress = "insert into addresses (address_name, postal_code, city, country) values (?,?,?, (select id from countries where country_name=?)) on duplicate key update id=id";
+
+		String sqlUpdateUser = "update user set firstname=?, lastname=?, address=(select id from addresses where address_name=?), "
 				+ "phone_number=?, email=?, password=?, birthdate=?, is_admin=? where users.id=?";
-		try (PreparedStatement ps = DBUtil.openConnection().prepareStatement(sql)) {
-			ps.setString(1, m.getFirstname());
-			ps.setString(2, m.getLastname());
-			ps.setString(3, m.getAddress().getAddressName());
-			ps.setString(4, m.getPhoneNumber());
-			ps.setString(5, m.getEmail());
-			ps.setString(6, m.getUsername());
-			ps.setString(7,m.getPassword());
-			ps.setDate(8, (Date) m.getBirthdate());
-			ps.setBoolean(9, m.isAdmin());
-			ps.setLong(10, m.getId());
+		
+		try (Connection conn = DBUtil.openConnection();
+				PreparedStatement psAddress = conn.prepareStatement(sqlAddress);
+				PreparedStatement psUser = conn.prepareStatement(sqlUpdateUser)
+				) {
+			// Insert new Address
+			psAddress.setString(1, m.getAddress().getAddressName());
+			psAddress.setString(2, m.getAddress().getPostalCode());
+			psAddress.setString(3, m.getAddress().getCity());
+			psAddress.setString(4, m.getAddress().getCountry().getName());
 			
-			ps.executeUpdate();
+			psAddress.executeUpdate();
+			
+			// Update User
+			psUser.setString(1, m.getFirstname());
+			psUser.setString(2, m.getLastname());
+			psUser.setString(3, m.getAddress().getAddressName());
+			psUser.setString(4, m.getPhoneNumber());
+			psUser.setString(5, m.getEmail());
+			psUser.setString(6, m.getUsername());
+			psUser.setString(7,m.getPassword());
+			psUser.setDate(8, (Date) m.getBirthdate());
+			psUser.setBoolean(9, m.isAdmin());
+			psUser.setLong(10, m.getId());
+			
+			psUser.executeUpdate();
+			
+			// Commit Transaction
+			conn.commit();
 		}catch (SQLException e) {
 			e.printStackTrace();
 			throw e;
@@ -63,10 +100,13 @@ public class UserDAOImpl implements IUserDAO{
 
 	@Override
 	public void delete(User m) throws SQLException {
+		
 		String sql = "delete * from users where user.id=?";
+		
 		try (PreparedStatement ps = DBUtil.openConnection().prepareStatement(sql)) {
 			ps.setLong(1, m.getId());
 			ps.executeUpdate();
+			
 		}catch (SQLException e) {
 			e.printStackTrace();
 			throw e;
@@ -75,12 +115,17 @@ public class UserDAOImpl implements IUserDAO{
 	
 	@Override
 	public User getInstanceById(long id) throws SQLException {
+		
 		String sql = "select * from users inner join addresses on address=addresses.id inner join countries on country=countries.id where users.id=?";
 		User user = new User();
+		
 		try (PreparedStatement ps = DBUtil.openConnection().prepareStatement(sql)) {
 			ps.setLong(1, id);
+			
 			try (ResultSet rs = ps.executeQuery()){
+				
 				if(rs.next()) {
+					
 					user.setId(rs.getLong(1));
 					user.setFirstname(rs.getString(2));
 					user.setLastname(rs.getString(3));
@@ -102,12 +147,16 @@ public class UserDAOImpl implements IUserDAO{
 				return user;
 				
 			}catch (SQLException e) {
+				
 				e.printStackTrace();
 				throw e;
+				
 			}
 		}catch (SQLException e) {
+			
 			e.printStackTrace();
 			throw e;
+			
 		}
 	}
 

@@ -37,7 +37,7 @@ function handleBookTitleSearchResults(response){
         let output = `<h1 class="display-1">${book.title}</h1>
         <div class="row mt-5">
           <div class="col-7">
-            <img src="../webapp/static/imgs.tumbnail.jpg" alt="">
+            <img src="/library-app/static/imgs/tumbnail.jpg" alt="bookPic">
           </div>
           <div class="col-5">
             <p class="display-6"><span class="fw-bold text-decoration-underline">Author:</span> ${book.author.lastname}, ${book.author.firstname}</p>
