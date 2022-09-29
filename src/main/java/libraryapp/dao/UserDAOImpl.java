@@ -25,6 +25,8 @@ public class UserDAOImpl implements IUserDAO{
 				PreparedStatement psAddress = conn.prepareStatement(sqlAddress);
 				PreparedStatement psUser = conn.prepareStatement(sqlUser)
 				) {
+			
+			conn.setAutoCommit(false);
 			// New Address Details
 			psAddress.setString(1, m.getAddress().getAddressName());
 			psAddress.setString(2, m.getAddress().getPostalCode());
@@ -67,6 +69,8 @@ public class UserDAOImpl implements IUserDAO{
 				PreparedStatement psAddress = conn.prepareStatement(sqlAddress);
 				PreparedStatement psUser = conn.prepareStatement(sqlUpdateUser)
 				) {
+			conn.setAutoCommit(false);
+			
 			// Insert new Address
 			psAddress.setString(1, m.getAddress().getAddressName());
 			psAddress.setString(2, m.getAddress().getPostalCode());

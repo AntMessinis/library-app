@@ -93,6 +93,20 @@ public class UserServiceImpl implements IUserService{
 		}
 	}
 	
+	@Override
+	public User userLogInValidation(UserDTO dto) throws SQLException {
+		try {
+			// Search in db for a user with this username
+			User user = dao.getInstanceByStrField("username", dto.getUsername());
+			
+			// Return user if password matches or null if it doesn't
+			return (user.getPassword().equals(dto.getPassword())) ? user : null;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw e;
+		}
+	}
+	
 	// Helper Function
 	private User extractFields(UserDTO dto) {
 		User user = new User(
@@ -114,6 +128,8 @@ public class UserServiceImpl implements IUserService{
 				);
 		return user;
 	}
+
+
 
 	
 

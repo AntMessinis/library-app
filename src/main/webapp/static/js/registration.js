@@ -1,5 +1,6 @@
 $(document).ready(function (){
     getCountryChoices();
+    
     $('#registrationForm').on('submit', function (e){
         e.preventDefault();
     });
@@ -8,6 +9,7 @@ $(document).ready(function (){
         postJSON();
     });
 });
+
 
 function getCountryChoices(){
     let xhr = new XMLHttpRequest();
@@ -26,6 +28,7 @@ function getCountryChoices(){
     }
     xhr.send();
 }
+
 
 function getCountryList(response){
     let countries = response;
