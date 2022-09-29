@@ -27,6 +27,7 @@ public class UserDAOImpl implements IUserDAO{
 				) {
 			
 			conn.setAutoCommit(false);
+			
 			// New Address Details
 			psAddress.setString(1, m.getAddress().getAddressName());
 			psAddress.setString(2, m.getAddress().getPostalCode());

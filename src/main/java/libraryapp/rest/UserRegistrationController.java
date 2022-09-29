@@ -27,8 +27,8 @@ import libraryapp.service.UserServiceImpl;
 public class UserRegistrationController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-    private static final IUserDAO DAO  = new UserDAOImpl();
-    private static final IUserService SERVICE = new UserServiceImpl(DAO);
+    private  final IUserDAO dao  = new UserDAOImpl();
+    private  final IUserService countryService = new UserServiceImpl(dao);
    
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
@@ -49,7 +49,7 @@ public class UserRegistrationController extends HttpServlet {
 		mapper.setDateFormat(df);
 		try {
 			UserDTO user = mapper.readValue(jsonString.toString(), UserDTO.class);
-			SERVICE.add(user);
+			countryService.add(user);
 		} catch(SQLException e) {
 			e.printStackTrace();
 		}

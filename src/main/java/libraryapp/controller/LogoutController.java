@@ -22,6 +22,7 @@ public class LogoutController extends HttpServlet {
 		HttpSession oldSession = request.getSession(false);
 		if(oldSession != null) oldSession.invalidate();
 		
+		// Forward to home page
 		request.getRequestDispatcher("/index.jsp").forward(request, response);
 	}
 

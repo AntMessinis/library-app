@@ -27,7 +27,7 @@
             <a class="nav-link active" aria-current="page" href="${pageContext.request.contextPath}/">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="${pageContext.request.contextPath}/about-us">About Us</a>
+            <a class="nav-link" href="${pageContext.request.contextPath}/about-us">About</a>
           </li>
           <li class="nav-item">
             <a href="${pageContext.request.contextPath}/privacy-policy" class="nav-link">Privacy Policy</a>
@@ -36,12 +36,20 @@
             <a href="${pageContext.request.contextPath}/contact" class="nav-link">Contact</a>
           </li>
         </ul>
-        <form class="d-flex " role="login">
-          <input class="form-control me-2" type="text" placeholder="Username" placeholder="Username">
-          <input class="form-control me-2" type="password" placeholder="Password" placeholder="Password">
-          <button class="btn btn-primary" type="submit">Login</button>
-        </form>
-        <a href="${pageContext.request.contextPath}/register" class="text-white nav-link">Register</a>
+        <c:choose>
+          <c:when test="${userFound}">
+            <span class="nav-item text-white">Welcome ${user.firstname}</span>
+            <a href="${pageContext.request.contextPath}/logout" class="text-white nav-link">Log Out</a>
+            </c:when>
+        <c:otherwise>
+          <form method="POST" action="${pageContext.request.contextPath}/login" class="d-flex " id="loginForm" role="login">
+              <input class="form-control me-2" name="username"  id="username" type="text" placeholder="Username" placeholder="Username">
+              <input class="form-control me-2" name="password"  id="password" type="password" placeholder="Password" placeholder="Password">
+              <button class="btn btn-primary" type="submit">Login</button>
+            </form>
+          <a href="${pageContext.request.contextPath}/register" class="text-white nav-link">Register</a>
+        </c:otherwise>
+        </c:choose>
       </div>
     </div>
   </nav>

@@ -53,6 +53,7 @@ public class LoginController extends HttpServlet {
 				HttpSession newSession = request.getSession(true);
 				newSession.setAttribute("user", user);
 				newSession.setAttribute("userFound", true);
+				
 				// Set session to expire in 10 minutes
 				newSession.setMaxInactiveInterval(10*60);
 				
@@ -60,8 +61,6 @@ public class LoginController extends HttpServlet {
 				
 				response.addCookie(ck);
 				
-				//request.setAttribute("userFound", true);
-				//request.getRequestDispatcher("index.jsp").forward(request, response);
 				response.sendRedirect(request.getContextPath()+"/index.jsp");
 			} else {
 				String message = "Invalid username or password";

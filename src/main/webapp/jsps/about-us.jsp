@@ -28,7 +28,7 @@
                 <a class="nav-link active" aria-current="page" href="${pageContext.request.contextPath}/">Home</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="${pageContext.request.contextPath}/about-us">About Us</a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/about-us">About</a>
               </li>
               <li class="nav-item">
                 <a href="${pageContext.request.contextPath}/privacy-policy" class="nav-link">Privacy Policy</a>
@@ -51,8 +51,6 @@
             	<a href="${pageContext.request.contextPath}/register" class="text-white nav-link">Register</a>
             </c:otherwise>
             </c:choose>
-            
-            
           </div>
         </div>
       </nav>

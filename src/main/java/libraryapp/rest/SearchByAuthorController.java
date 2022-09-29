@@ -29,6 +29,7 @@ public class SearchByAuthorController extends HttpServlet {
        
 	private final IBookDAO dao = new BookDAOImpl();
 	private final IBookService bookService = new BookServiceImpl(dao);
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setHeader("Content-Type", "application/json; text=UTF-8");
 		

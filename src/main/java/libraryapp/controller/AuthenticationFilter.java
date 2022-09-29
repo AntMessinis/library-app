@@ -26,19 +26,20 @@ public class AuthenticationFilter extends HttpFilter implements Filter {
 		// TODO Auto-generated method stub
 	}
 
-	/**
-	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
-	 */
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpServletResponse res = (HttpServletResponse) response;
 		
+		// Get Current session if it exists
 		HttpSession session = req.getSession(false);
 		
+		// IF session does not exist create new session and redirect
 		if (session == null) {
 			this.context.log("Unauthorized access request");
 			HttpSession newSession = req.getSession(true);
 			res.sendRedirect(req.getContextPath() + "/index.jsp");
+			
+			// Else continue
 		} else {
 			chain.doFilter(request, response);
 		}
