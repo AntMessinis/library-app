@@ -44,8 +44,8 @@
            		 </c:when>
             <c:otherwise>
             	<form method="POST" action="${pageContext.request.contextPath}/login" class="d-flex " id="loginForm" role="login">
-              		<input class="form-control me-2" name="username"  id="username" type="text" placeholder="Username" placeholder="Username">
-              		<input class="form-control me-2" name="password"  id="password" type="password" placeholder="Password" placeholder="Password">
+              		<input class="form-control me-2" name="userUsername"  id="username" type="text" placeholder="Username" placeholder="Username">
+              		<input class="form-control me-2" name="userPassword"  id="password" type="password" placeholder="Password" placeholder="Password">
               		<button class="btn btn-primary" type="submit">Login</button>
            		 </form>
             	<a href="${pageContext.request.contextPath}/register" class="text-white nav-link">Register</a>

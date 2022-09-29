@@ -30,8 +30,8 @@ public class LoginController extends HttpServlet {
 		response.setContentType("text/html; charset=UTF-8");
 		
 		// Get parameters for log in validation
-		String username = request.getParameter("username");
-		String password = request.getParameter("password");
+		String username = request.getParameter("userUsername");
+		String password = request.getParameter("userPassword");
 		
 		// Create DTO
 		UserDTO dto = new UserDTO();
@@ -57,10 +57,11 @@ public class LoginController extends HttpServlet {
 				// Set session to expire in 10 minutes
 				newSession.setMaxInactiveInterval(10*60);
 				
+				// Create new cookie with session id and add it to response
 				Cookie ck = new Cookie("cfuser", newSession.getId());
-				
 				response.addCookie(ck);
 				
+				// Redirect
 				response.sendRedirect(request.getContextPath()+"/index.jsp");
 			} else {
 				String message = "Invalid username or password";

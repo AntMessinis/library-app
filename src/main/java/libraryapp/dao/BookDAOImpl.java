@@ -147,7 +147,7 @@ public class BookDAOImpl implements IBookDAO{
 	
 	@Override
 	public Book getInstanceByStrField(String fieldName, String value) throws SQLException {
-		String sql = RETRIEVE_BOOK_SQL 	+ "    where " + fieldName +"=?";
+		String sql = RETRIEVE_BOOK_SQL 	+ " where " + fieldName +"=?";
 		Book book = new Book();
 		try (PreparedStatement ps = DBUtil.openConnection().prepareStatement(sql)){
 			
@@ -223,7 +223,7 @@ public class BookDAOImpl implements IBookDAO{
 
 	@Override
 	public List<Book> getListByField(String fieldName, String value) throws SQLException {
-		String sql = RETRIEVE_BOOK_SQL 	+ "	where " + fieldName +"=?";
+		String sql = RETRIEVE_BOOK_SQL 	+ " where " + fieldName +"=?";
 		List<Book> books = new ArrayList<>();
 		try (PreparedStatement ps = DBUtil.openConnection().prepareStatement(sql)){
 			ps.setString(1, value);

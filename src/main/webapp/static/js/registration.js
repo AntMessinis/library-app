@@ -50,8 +50,8 @@ function getCountryList(response){
 
 function postJSON(){
     // Get data from registration form
-    let username = $('#username').val().trim();
-    let password = $('#password').val().trim();
+    let username = $('#newUserUsername').val().trim();
+    let password = $('#newUserPassword').val().trim();
     let email = $('#email').val().trim();
     let firstname = $('#firstname').val().trim();
     let lastname = $('#lastname').val().trim();

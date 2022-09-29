@@ -107,28 +107,28 @@
   <div class="container-sm mt-5">
     <h2 class="display-2">Become a Member</h2>
     <span id="feedback"></span>
-    <form action="" class="needs-validation"" method="post" id="registrationForm">
+    <form method="post" id="registrationForm">
         <div class="form-group row mt-3">
             <div class="col-md-6 mt-3">
-            <label for="username" class="form-label">Username</label>
-            <input type="text" class="form-control" id="username" name="username" placeholder="JDoe">
-        </div>
-        <div class="col-md-6 mt-3">
+            <label for="newUserUsername" class="form-label">Username</label>
+            <input type="text" class="form-control" id="newUserUsername" name="newUserUsername" placeholder="JDoe">
+          </div>
+          <div class="col-md-6 mt-3">
             <label for="email" class="form-label">Email address</label>
             <input type="email" class="form-control" id="email" placeholder="johndoe@codingfactory.aueb">
-        </div>
+          </div>
         </div>
         
         <div class="form-group row mt-3">
             <div class="col-md-6 mt-3">
-                <label for="password" class="form-label">Password</label>
-                <input type="password" id="password" class="form-control">
-                <small id="emailHelp" class="form-text text-muted">Password must be at least 8 characters long and must contain CAPITAL letters, numbers and special characters</small>
+                <label for="newUserPassword" class="form-label">Password</label>
+                <input type="password" id="newUserPassword" name="newUserPassword" class="form-control">
+                <small id="emailHelp" class="form-text text-muted">Password must be at least 8 characters long and must contain CAPITAL letters, lower case letters, numbers and special characters</small>
             </div>
             <div class="col-md-6 mt-3">
                 <label for="repeatPassword" class="form-label">Repeat Password</label>
                 <input type="password" id="repeatPassword" class="form-control">
-                <small id="emailHelp" class="form-text text-muted">Password must be at least 8 characters long and must contain CAPITAL letters, numbers and special characters</small>
+                <small id="emailHelp" class="form-text text-muted">Password must be at least 8 characters long and must contain CAPITAL letters, lower case letters, numbers and special characters</small>
             </div>
         </div>
         <legend class="mt-5">Personal Info</legend>
@@ -184,6 +184,6 @@
 
   
   <script src="${pageContext.request.contextPath}/static/js/jQuery.min.js?version=2"></script>
-  <script src="${pageContext.request.contextPath}/static/js/registration.js?version=48" type="text/javascript"></script>
+  <script src="${pageContext.request.contextPath}/static/js/registration.js?version=51" type="text/javascript"></script>
 </body>
 </html>
