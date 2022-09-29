@@ -45,7 +45,7 @@ public class UserDAOImpl implements IUserDAO{
 			psUser.setString(6, m.getUsername());
 			psUser.setString(7,m.getPassword());
 			psUser.setDate(8, new Date( m.getBirthdate().getTime())); // Converting Java.Util.Date to Java.SQL.Date and set it to ps
-			psUser.setBoolean(9, m.isAdmin());
+			psUser.setBoolean(9, m.getIsAdmin());
 			
 			psUser.executeUpdate();
 			
@@ -89,7 +89,7 @@ public class UserDAOImpl implements IUserDAO{
 			psUser.setString(6, m.getUsername());
 			psUser.setString(7,m.getPassword());
 			psUser.setDate(8, (Date) m.getBirthdate());
-			psUser.setBoolean(9, m.isAdmin());
+			psUser.setBoolean(9, m.getIsAdmin());
 			psUser.setLong(10, m.getId());
 			
 			psUser.executeUpdate();

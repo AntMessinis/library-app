@@ -99,7 +99,7 @@ public class User extends AbstractEntity{
 		this.birthdate = birthdate;
 	}
 
-	public boolean isAdmin() {
+	public boolean getIsAdmin() {
 		return isAdmin;
 	}
 

@@ -26,7 +26,7 @@
                 <a class="nav-link active" aria-current="page" href="${pageContext.request.contextPath}/">Home</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="${pageContext.request.contextPath}/about-us">About</a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/about">About</a>
               </li>
               <li class="nav-item">
                 <a href="${pageContext.request.contextPath}/privacy-policy" class="nav-link">Privacy Policy</a>
@@ -54,6 +54,54 @@
           </div>
         </div>
       </nav>
+      <c:if test="${user.isAdmin}">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+          <div class="container-fluid">
+            <a class="navbar-brand" href="#">Admin Panel</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarColor02">
+              <ul class="navbar-nav me-auto">
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Books</a>
+                  <div class="dropdown-menu">
+                    <a class="dropdown-item" href="#">Add Book</a>
+                    <a class="dropdown-item" href="#">Update Book Details</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item text-danger" href="#">Delete Book from database</a>
+                  </div>
+                </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Authors</a>
+                  <div class="dropdown-menu">
+                    <a class="dropdown-item" href="#">Add Author</a>
+                    <a class="dropdown-item" href="#">Update Author Details</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item text-danger" href="#">Delete Author from database</a>
+                  </div>
+                </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Categories</a>
+                  <div class="dropdown-menu">
+                    <a class="dropdown-item" href="#">Add Category</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item text-danger" href="#">Delete Category from database</a>
+                  </div>
+                </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Analytics</a>
+                  <div class="dropdown-menu">
+                    <a class="dropdown-item" href="#">Month Statistics</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">More Analytics</a>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </c:if>
 
 	<c:choose>
 		<c:when test="${userFound}">

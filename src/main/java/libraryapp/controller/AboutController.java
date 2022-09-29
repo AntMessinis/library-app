@@ -11,10 +11,10 @@ import javax.servlet.http.HttpSession;
 import libraryapp.model.User;
 
 /**
- * Servlet implementation class AboutUsController
+ * Servlet implementation class AboutController
  */
 @WebServlet("/about")
-public class AboutUsController extends HttpServlet {
+public class AboutController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
    
@@ -23,7 +23,7 @@ public class AboutUsController extends HttpServlet {
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute("user");
 		request.setAttribute("user", user);
-		request.getRequestDispatcher("jsps/about-us.jsp").forward(request, response);
+		request.getRequestDispatcher("jsps/about.jsp").forward(request, response);
 	}
 
 	
