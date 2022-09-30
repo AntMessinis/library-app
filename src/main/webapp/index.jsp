@@ -66,27 +66,27 @@
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Books</a>
                   <div class="dropdown-menu">
-                    <a class="dropdown-item" href="#">Add Book</a>
-                    <a class="dropdown-item" href="#">Update Book Details</a>
+                    <a class="dropdown-item" type="button" id="adminAddBook" href="#">Add Book</a>
+                    <a class="dropdown-item" type="button" id="adminUpdateBook" href="#">Update Book Details</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item text-danger" href="#">Delete Book from database</a>
+                    <a class="dropdown-item text-danger" id="adminDeleteBook" href="#">Delete Book from database</a>
                   </div>
                 </li>
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Authors</a>
                   <div class="dropdown-menu">
-                    <a class="dropdown-item" href="#">Add Author</a>
-                    <a class="dropdown-item" href="#">Update Author Details</a>
+                    <a class="dropdown-item" type="button" id="adminAddAuthor" href="#">Add Author</a>
+                    <a class="dropdown-item" type="button" id="adminUpdateAuthor" href="#">Update Author Details</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item text-danger" href="#">Delete Author from database</a>
+                    <a class="dropdown-item text-danger" type="button" id="adminDeleteAuthor" href="#">Delete Author from database</a>
                   </div>
                 </li>
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Categories</a>
                   <div class="dropdown-menu">
-                    <a class="dropdown-item" href="#">Add Category</a>
+                    <a class="dropdown-item" type="button" id="adminAddCategory" href="#">Add Category</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item text-danger" href="#">Delete Category from database</a>
+                    <a class="dropdown-item text-danger" id="adminDeleteCategory" href="#">Delete Category from database</a>
                   </div>
                 </li>
                 <li class="nav-item dropdown">
@@ -105,8 +105,8 @@
 
 	<c:choose>
 		<c:when test="${userFound}">
-			<img src="${pageContext.request.contextPath}/imgs/books-1920.jpg" alt="">
-     	 <div class="container-xxl mt-5">
+
+     	 <div class="container-xxl mt-5" id="mainContainer">
         <h5 class="display-5">Welcome to CF Library ${user.firstname}</h5>
         <p>Search for books below</p>
         <form class="d-flex">
@@ -123,8 +123,10 @@
           </ul>
         </form>
       </div>
+
       <div id="searchResults" class="container-xl mt-5 searchResults">
       </div>
+
       <div id="feedback">
       </div>
 		</c:when>
@@ -141,7 +143,8 @@
       <script src="${pageContext.request.contextPath}/static/js/titleSearch.js?version=27" type="text/javascript"></script>
       <script src="${pageContext.request.contextPath}/static/js/authorSearch.js?version=40" type="text/javascript"></script>
       <script src="${pageContext.request.contextPath}/static/js/categorySearch.js?version=29" type="text/javascript"></script>
-      <script src="${pageContext.request.contextPath}/static/js/isbnSearch.js?version=2" type="text/javascript"></script> 
+      <script src="${pageContext.request.contextPath}/static/js/isbnSearch.js?version=2" type="text/javascript"></script>
+      <script src="${pageContext.request.contextPath}/static/js/adminBook.js?version=4" type="text/javascript"></script> 
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
 </body>
 </html>

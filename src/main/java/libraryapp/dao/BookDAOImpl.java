@@ -225,8 +225,11 @@ public class BookDAOImpl implements IBookDAO{
 	public List<Book> getListByField(String fieldName, String value) throws SQLException {
 		String sql = RETRIEVE_BOOK_SQL 	+ " where " + fieldName +"=?";
 		List<Book> books = new ArrayList<>();
+		
 		try (PreparedStatement ps = DBUtil.openConnection().prepareStatement(sql)){
+			
 			ps.setString(1, value);
+			
 			try(ResultSet rs = ps.executeQuery()) {
 				while (rs.next()) {
 					Book bookToList = new Book(

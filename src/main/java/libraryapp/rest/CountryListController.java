@@ -47,7 +47,5 @@ public class CountryListController extends HttpServlet {
 		}catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
 	}
-
 }

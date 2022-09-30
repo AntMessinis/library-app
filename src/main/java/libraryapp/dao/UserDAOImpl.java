@@ -18,13 +18,14 @@ public class UserDAOImpl implements IUserDAO{
 	@Override
 	public void insert(User m) throws SQLException {
 		String sqlAddress = "insert into addresses (address_name, postal_code, city, country) values (?,?,?, (select id from countries where country_name=?)) on duplicate key update id=id";
+		
 		String sqlUser = "insert into users (firstname, lastname, address, phone_number, email, username, password, birthdate, is_admin) "
 				+ "values (?,?,(select id from addresses where address_name=?),?,?,?,?,?,?) on duplicate key update id=id";
-		try (
-				Connection conn = DBUtil.openConnection();
-				PreparedStatement psAddress = conn.prepareStatement(sqlAddress);
-				PreparedStatement psUser = conn.prepareStatement(sqlUser)
-				) {
+		
+		Connection conn = DBUtil.openConnection();
+		
+		try (PreparedStatement psAddress = conn.prepareStatement(sqlAddress);
+				PreparedStatement psUser = conn.prepareStatement(sqlUser)) {
 			
 			conn.setAutoCommit(false);
 			
@@ -53,8 +54,11 @@ public class UserDAOImpl implements IUserDAO{
 			conn.commit();
 			
 		}catch (SQLException e) {
+			conn.rollback();
 			e.printStackTrace();
 			throw e;
+		} finally {
+			conn.close();
 		}
 		
 	}
