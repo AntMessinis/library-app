@@ -169,16 +169,16 @@ function addBookToDB(){
     let isbn = $('#addBookIsbn').val().trim();
     let description = $('#addBookDescription').val().trim();
     let category = $('#categorySelect option:selected').val();
-    let categoryName = category.substring(0, category.indexOf(','));
-    let subcategoryName = category.substring(category.indexOf(',') + 1);
-    let author = $('#authorSelect option:selected').val();
+    let categoryName = category.substring(0, category.indexOf(',')).trim();
+    let subcategoryName = category.substring(category.indexOf(',') + 1).trim();
+    let author = $('#authorSelect option:selected').val().trim();
 
     let firstCommaIndex = author.indexOf(",");
     let secondCommaIndex =author.lastIndexOf(",");
 
-    let firstname = author.substring(0,firstCommaIndex);
-    let lastname = author.substring(firstCommaIndex + 1, secondCommaIndex);
-    let countryName = author.substring(secondCommaIndex + 1);
+    let lastname = author.substring(0,firstCommaIndex).trim();
+    let firstname = author.substring(firstCommaIndex + 1, secondCommaIndex).trim();
+    let countryName = author.substring(secondCommaIndex + 1).trim();
 
     let languageName = $("#languageSelect option:selected").text();
     let copiesInLibrary = $('#addCopiesInLibrary').val();
@@ -194,7 +194,7 @@ function addBookToDB(){
             if(xhr.status === 200){
                 console.log("status OK")
                 
-                $("#feedback").html('<p class="text-success">Book added</p>');
+                $("#feedback").html(`<p class="text-success">${title} was added successfully to the library!</p>`);
                 resetFields();
             }else{
                 console.log("status Not OK");
