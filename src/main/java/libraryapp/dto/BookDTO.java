@@ -8,7 +8,7 @@ public class BookDTO extends AbstractDTO{
 	private SubcategoryDTO category;
 	private String description;
 	
-	private int amountInLibrary;
+	private int copiesInLibrary;
 	private int currentlyBorrowed;
 	public String getTitle() {
 		return title;
@@ -40,11 +40,11 @@ public class BookDTO extends AbstractDTO{
 	public void setCategory(SubcategoryDTO category) {
 		this.category = category;
 	}
-	public int getAmountInLibrary() {
-		return amountInLibrary;
+	public int getCopiesInLibrary() {
+		return copiesInLibrary;
 	}
-	public void setAmountInLibrary(int amountInLibrary) {
-		this.amountInLibrary = amountInLibrary;
+	public void setCopiesInLibrary(int amountInLibrary) {
+		this.copiesInLibrary = amountInLibrary;
 	}
 	public int getCurrentlyBorrowed() {
 		return currentlyBorrowed;

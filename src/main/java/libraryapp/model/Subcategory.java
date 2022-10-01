@@ -7,6 +7,9 @@ public class Subcategory extends Category{
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	public Subcategory(String subcategoryName) {
+       this.subcategoryName = subcategoryName;
+    }
 
 	public Subcategory(long id, String category) {
 		super(id, category);

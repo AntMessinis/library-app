@@ -2,6 +2,6 @@ package libraryapp.dao;
 
 import libraryapp.model.Language;
 
-public interface ILanguagesDAO extends IGenericDAO<Language>{
+public interface ILanguageDAO extends IGenericDAO<Language>{
 
 }

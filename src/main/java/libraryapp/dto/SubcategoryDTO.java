@@ -3,7 +3,18 @@ package libraryapp.dto;
 public class SubcategoryDTO extends AbstractDTO{
 	private String categoryName;
 	private String subcategoryName;
-	public String getCategoryName() {
+	
+	
+	
+	public SubcategoryDTO() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+    public SubcategoryDTO(String subcategoryName) {
+        super();
+        this.subcategoryName = subcategoryName;
+    }
+    public String getCategoryName() {
 		return categoryName;
 	}
 	public void setCategoryName(String categoryName) {

@@ -23,10 +23,10 @@ public class BookDAOImpl implements IBookDAO{
 
 	@Override
 	public void insert(Book m) throws SQLException {
-		String sql = "insert into books (title, isbn, author, language, category, description, in_library, currently_borrowed) values "
+		String sql = "insert into books (title, isbn, author, language, category, description, in_library,currently_borrowed) values "
 				+ "(?, ?, (select id from authors where firstname=? and lastname=?), "
 				+ "(select id from languages where language_name=?),"
-				+ "(select id from subcategories where subcategory_name=?), ?, ?) on duplicate key update id=id";
+				+ "(select id from subcategories where subcategory_name=?), ? ,?, ?) on duplicate key update id=id";
 		
 		try (Connection conn = DBUtil.openConnection();
 				PreparedStatement ps = conn.prepareStatement(sql)){

@@ -9,7 +9,7 @@ import java.util.List;
 import libraryapp.dao.dbutil.DBUtil;
 import libraryapp.model.Language;
 
-public class LanguagesDAOImpl implements ILanguagesDAO{
+public class LanguageDAOImpl implements ILanguageDAO{
 
 	@Override
 	public void insert(Language m) throws SQLException {

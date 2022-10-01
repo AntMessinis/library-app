@@ -114,29 +114,29 @@ public class BookServiceImpl implements IBookService{
 	
 	private Book extractFields(BookDTO dto) {
 		Language language = new Language(
-				//dto.getLanguage().getId(),
+				dto.getLanguage().getId(),
 				dto.getLanguage().getLanguageName());
 		
 		Author author = new Author(
-				//dto.getAuthor().getId(),
+				dto.getAuthor().getId(),
 				dto.getAuthor().getFirstname(), 
 				dto.getAuthor().getLastname(), 
 				new Country(dto.getAuthor().getCountryOfOrigin().getCountryName()));
 		
 		Subcategory category = new Subcategory(
-				//dto.getCategory().getId(),
+				dto.getCategory().getId(),
 				dto.getCategory().getSubcategoryName(), 
 				dto.getCategory().getCategoryName());
 		
 		Book book = new Book(
-				//dto.getId(),
+				dto.getId(),
 				dto.getTitle(), 
 				dto.getIsbn(), 
 				author, 
 				language, 
 				category, 
 				dto.getDescription(),
-				dto.getAmountInLibrary(), 
+				dto.getCopiesInLibrary(), 
 				dto.getCurrentlyBorrowed());
 		
 		return book;
