@@ -10,32 +10,55 @@ $(document).ready(function(){
         showUpdateBookForm();
     });
 
-    $('#adminAddBook').on('click', function(){
-        showDeleteBookForm();
+    $('#adminDeleteBook').on('click', function(){
+        //showDeleteBookForm();
     });
 });
 
 function showAddBookForm(){
-    $('#mainContainer').html(`<form>
-        <label for="addBookTitle" class="form-label">Title</label>
-        <input id="addBookTitle" class="form-control me-sm-2" type="text" placeholder="Book Title">
-        <label for="addBookIsbn" class="form-label">ISBN</label>
-        <input id="addBookIsbn" class="form-control me-sm-2" type="text" placeholder="Book Title">
-        <label for="categorySelect" class="form-label">Category</label>
+    $('#mainContainer').html(`
+    <h3>Add New Title to Library</h3>
+    <form id="bookForm">
+        <div class="row">
+        <div class="col-6">  
+        <label for="addBookTitle" class="form-label mt-3">Title</label>
+        <input id="addBookTitle" class="form-control me-sm-2" type="text" placeholder="Title"></div>
+        <div class="col-6">  
+        <label for="addBookIsbn" class="form-label mt-3">ISBN</label>
+        <input id="addBookIsbn" class="form-control me-sm-2" type="text" placeholder="ISBN"></div>
+        </div>
+        <div class="row">
+        <div class="col-4">  
+        <label for="categorySelect" class="form-label mt-3">Category</label>
         <select class="form-select" id="categorySelect" placeholder="Choose Category">
-        </select>
-        <label for="authorSelect" class="form-label">Author</label>
+        </select></div>
+        <div class="col-4">  
+        <label for="authorSelect" class="form-label mt-3">Author</label>
         <select class="form-select" id="authorSelect" placeholder="Choose Author">        
-        </select>     
-        <label for="addCopiesInLibrary" class="form-label">Copies in Library</label>
-        <input id="addCopiesInLibrary" class="form-control me-sm-2" type="number">
+        </select></div>
+        <div class="col-4">  
+        <label for="addCopiesInLibrary" class="form-label mt-3">Copies in Library</label>
+        <input id="addCopiesInLibrary" class="form-control me-sm-2" type="number" min="1" max="20 style="-moz-appearance: textfield; -webkit-appearance: none;">
+        </div>
+        </div>
+        <div class="row"><label for="addBookDescription" class="form-label mt-3">Description</label>
+        <textarea id="addBookDescription" class="form-control me-sm-2" placeholder="Description" rows="10"></textarea></div>
         <div class="form-group row mt-3">
             <div class="col-md-3">
-                <button type="submit" id="registrationButton" class="btn btn-primary">Submit</button>
+                <button type="submit" id="addBookButton" class="btn btn-primary">Submit</button>
                 <a role="button" class="btn btn-outline-primary" href="/library-app/">Cancel</a>
             </div>
         </div>          
-    </form>`)
+    </form>`);
+
+	$('#bookForm').on('submit', function (e){
+        e.preventDefault();
+    });
+    
+    $('#addBookButton').on('click', function(){
+        addBookToDB();
+    });
+    
 }
 
 function getAuthorsFromDB(){
@@ -102,6 +125,56 @@ function getCategoryList(categories){
         for(let category of categories){
             output +=  `<option value="${category.subcategoryName}">${category.subcategoryName}</option>`
         }
-        $('#authorSelect').append(output);
+        $('#categorySelect').append(output);
     }
+}
+
+function addBookToDB(){
+    let title = $('#addBookTitle').val().trim();
+    let isbn = $('#addBookIsbn').val().trim();
+    let description = $('#addBookDescription').val().trim();
+    let category = $('#categorySelect option:selected').text();
+    let author = $('#authorSelect option:selected').text();
+    let firstname = author.substring(0,author.indexOf(","));
+    let lastname = author.substring(author.indexOf(",")+1);
+    let copiesInLibrary = $('#addCopiesInLibrary').val();
+
+    let xhr = new XMLHttpRequest();
+    xhr.open('POST', 'add-book', true);
+    xhr.timeout = 10000;
+    xhr.ontimeout = (e) => APIError();
+    xhr.setRequestHeader('Content-Type','application/json;charset=UTF-8');
+
+    xhr.onreadystatechange = function(){
+        if(xhr.readyState === 4){
+            if(xhr.status === 200){
+                console.log("status OK")
+                
+                $("#feedback").html('<p class="text-success">Book added</p>');
+                resetFields();
+            }else{
+                console.log("status Not OK");
+                APIError();
+            }
+        }
+    }
+  var data = JSON.stringify({
+        "title":title,
+        "isbn": isbn,
+        "author": {"firstname": firstname,
+        "lastname": lastname},
+        "category": category,
+        "description": description,
+        "copiesInLibrary": copiesInLibrary,
+        "currentlyBorrowed": 0                 
+    });
+  xhr.send(data);
+}
+
+function resetFields(){
+    $('#bookForm :input').val('');
+}
+
+function APIError(){
+    $("#feedback").html('<p class="text-danger">Something went wrong, the page might not work as intended</p>');
 }

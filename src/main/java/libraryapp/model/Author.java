@@ -8,6 +8,10 @@ public class Author extends AbstractEntity{
 	public Author() {
 		super();
 	}
+	public Author(String firstname, String lastname) {
+        this.firstname  = firstname;
+        this.lastname = lastname;
+    }
 	
 	public Author(long id, String firstname, String lastname, Country countryOfOrigin) {
 		super(id);
