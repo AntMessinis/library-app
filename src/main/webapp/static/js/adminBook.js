@@ -11,6 +11,7 @@ $(document).ready(function(){
     });
 
     $('#adminDeleteBook').on('click', function(){
+        showSearchBookForm();
         //showDeleteBookForm();
     });
 });

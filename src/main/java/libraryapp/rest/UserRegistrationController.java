@@ -45,8 +45,8 @@ public class UserRegistrationController extends HttpServlet {
 		}
 		
 		ObjectMapper mapper = new ObjectMapper();
-		DateFormat df = new SimpleDateFormat("yyyy-mm-dd");
-		mapper.setDateFormat(df);
+		//DateFormat df = new SimpleDateFormat("yyyy-mm-dd");
+		//mapper.setDateFormat(df);
 		try {
 			UserDTO user = mapper.readValue(jsonString.toString(), UserDTO.class);
 			countryService.add(user);
