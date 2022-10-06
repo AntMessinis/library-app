@@ -20,7 +20,7 @@ public class UserDAOImpl implements IUserDAO{
 		String sqlAddress = "insert into addresses (address_name, postal_code, city, country) values (?,?,?, (select id from countries where country_name=?)) on duplicate key update id=id";
 		
 		String sqlUser = "insert into users (firstname, lastname, address, phone_number, email, username, password, birthdate, is_admin) "
-				+ "values (?,?,(select id from addresses where address_name=?),?,?,?,?,?,?) on duplicate key update id=id";
+				+ "values (?,?,(select id from addresses where address_name=? and postal_code=? and city=?),?,?,?,?,?,?) on duplicate key update id=id";
 		
 		Connection conn = DBUtil.openConnection();
 		
@@ -41,12 +41,14 @@ public class UserDAOImpl implements IUserDAO{
 			psUser.setString(1, m.getFirstname());
 			psUser.setString(2, m.getLastname());
 			psUser.setString(3, m.getAddress().getAddressName());
-			psUser.setString(4, m.getPhoneNumber());
-			psUser.setString(5, m.getEmail());
-			psUser.setString(6, m.getUsername());
-			psUser.setString(7,m.getPassword());
-			psUser.setDate(8, new Date( m.getBirthdate().getTime())); // Converting Java.Util.Date to Java.SQL.Date and set it to ps
-			psUser.setBoolean(9, m.getIsAdmin());
+			psUser.setString(4, m.getAddress().getPostalCode());
+			psUser.setString(5, m.getAddress().getCity());
+			psUser.setString(6, m.getPhoneNumber());
+			psUser.setString(7, m.getEmail());
+			psUser.setString(8, m.getUsername());
+			psUser.setString(9,m.getPassword());
+			psUser.setDate(10, new Date( m.getBirthdate().getTime())); // Converting Java.Util.Date to Java.SQL.Date and set it to ps
+			psUser.setBoolean(11, m.getIsAdmin());
 			
 			psUser.executeUpdate();
 			

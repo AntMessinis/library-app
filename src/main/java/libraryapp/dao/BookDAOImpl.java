@@ -18,8 +18,8 @@ public class BookDAOImpl implements IBookDAO{
 	private static final String RETRIEVE_BOOK_SQL = "select * from books  inner join authors on author=authors.id"
 			+ "	inner join countries on authors.country=countries.id"
 			+ "	inner join languages on books.language=languages.id"
-			+ "    inner join subcategories on books.category=subcategories.id"
-			+ "    inner join categories on subcategories.category=categories.id";
+			+ "   inner join subcategories on books.category=subcategories.id"
+			+ "   inner join categories on subcategories.category=categories.id";
 
 	@Override
 	public void insert(Book m) throws SQLException {
@@ -147,11 +147,11 @@ public class BookDAOImpl implements IBookDAO{
 	
 	@Override
 	public Book getInstanceByStrField(String fieldName, String value) throws SQLException {
-		String sql = RETRIEVE_BOOK_SQL 	+ " where " + fieldName +"=?";
+		String sql = RETRIEVE_BOOK_SQL 	+ " where " + fieldName +" like ?";
 		Book book = new Book();
 		try (PreparedStatement ps = DBUtil.openConnection().prepareStatement(sql)){
 			
-			ps.setString(1, value);
+			ps.setString(1, "%"+value+"%");
 			try (ResultSet rs = ps.executeQuery()){
 				if(rs.next()) {
 					book.setId(rs.getLong(1));

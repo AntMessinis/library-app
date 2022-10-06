@@ -1,5 +1,6 @@
 $(document).ready(function(){
     $('#adminAddBook').on('click', function(){
+        clearSearchResults()
         showAddBookForm();
         getCategoriesFromDB();
         getAuthorsFromDB();
@@ -7,6 +8,7 @@ $(document).ready(function(){
     });
 
     $('#adminUpdateBook').on('click', function(){
+        clearSearchResults();
         showSearchBookForm();
     });
 
@@ -370,6 +372,10 @@ function showBookForm(){
             </div>
         </div>          
     </form>`);
+}
+
+function clearSearchResults(){
+    $("#searchResults").html('');
 }
 
 function resetFields(jQueryFormSelector){

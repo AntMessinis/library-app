@@ -10,7 +10,7 @@
     <title>Library App Antonis Messinis</title>
      <!-- CSS only -->
 	  <link href="${pageContext.request.contextPath}/static/css/bootstrap.min.css" rel="stylesheet">
-      
+
     <title>Document</title>
 </head>
 <body>
@@ -124,7 +124,7 @@
         </form>
       </div>
 
-      <div id="searchResults" class="container-xl mt-5 searchResults">
+      <div id="searchResults" class="container-xxl mt-5 searchResults">
       </div>
 
       <div id=" container-xl feedback">
@@ -144,7 +144,7 @@
       <script src="${pageContext.request.contextPath}/static/js/authorSearch.js?version=41" type="text/javascript"></script>
       <script src="${pageContext.request.contextPath}/static/js/categorySearch.js?version=30" type="text/javascript"></script>
       <script src="${pageContext.request.contextPath}/static/js/isbnSearch.js?version=2" type="text/javascript"></script>
-      <script src="${pageContext.request.contextPath}/static/js/adminBook.js?version=50" type="text/javascript"></script> 
+      <script src="${pageContext.request.contextPath}/static/js/adminBook.js?version=51" type="text/javascript"></script> 
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
 </body>
 </html>
