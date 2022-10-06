@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.sql.SQLException;
 
 import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -18,17 +19,18 @@ class CountryDAOImplTest {
     @BeforeAll
     public static void setupClass() throws SQLException{
         countryDAO = new CountryDAOImpl();
+        createDummyCountries();
     }
     
     @BeforeEach
     public  void setup() throws SQLException{
-       // createDummyCountries();
+      
     }
     
+    
     @AfterAll
-    public static void tearDown() throws SQLException{
+    public static void tearDown() throws SQLException{}
         
-    }
     
     @Test
     void getCountry() throws SQLException {
@@ -58,13 +60,14 @@ class CountryDAOImplTest {
         assertNotNull(test);
     }
     
+    
     public static void createDummyCountries() throws SQLException{
         Country dummy = new Country();
         dummy.setName("JUnitTestCountry1");
         countryDAO.insert(dummy);
         
         Country dummySecond = new Country();
-        dummy.setName("JUnitTestCountry2");
+        dummySecond.setName("JUnitTestCountry2");
         countryDAO.insert(dummySecond);
     }
     
