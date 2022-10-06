@@ -3,17 +3,16 @@ package libraryapp.dao;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 
-import libraryapp.dao.dbutil.DBUtil;
+
 import libraryapp.model.Country;
 
 @TestMethodOrder(OrderAnnotation.class)
@@ -24,7 +23,12 @@ class CountryDAOImplTest {
     public static void setupClass() throws SQLException{
         countryDAO = new CountryDAOImpl();
         createDummyCountries();
-    }       
+    } 
+    
+    @AfterAll
+    public static void clear() throws SQLException{
+        
+    }
     
     @Test
     @Order(1)
@@ -62,25 +66,27 @@ class CountryDAOImplTest {
     @Test
     @Order(3)
     void deleteFirstTestCountry() throws SQLException {
-        Country c = new Country();
-        c.setName("JUnitTestCountry1Updated");
+        Country c = countryDAO.getInstanceByStrField("country_name", "JUnitTestCountry1Updated");
         countryDAO.delete(c);
         
-        Country test = countryDAO.getInstanceByStrField("country_name", "JUnitTestCountry1Updated");
-        assertNotNull(test);
+        assertNull(countryDAO.getInstanceByStrField("country_name", "JUnitTestCountry1Updated"));
     }
     
     @Test
     @Order(5)
     void deleteSecondTestCountry() throws SQLException {
-        Country c = new Country();
-        c.setName("JUnitTestCountry2Updated");
+        Country c = countryDAO.getInstanceByStrField("country_name", "JUnitTestCountry2Updated");
         countryDAO.delete(c);
         
-        Country test = countryDAO.getInstanceByStrField("country_name", "JUnitTestCountry2Updated");
-        assertNotNull(test);
+        assertNull(countryDAO.getInstanceByStrField("country_name", "JUnitTestCountry2Updated"));
     }
     
+    @Test
+    @Order(6)
+    void getCountryListTest() throws SQLException{
+        List<Country> countries = countryDAO.getAll();
+        assertNotNull(countries);
+    }
     
     public static void createDummyCountries() throws SQLException{
         Country dummy = new Country();

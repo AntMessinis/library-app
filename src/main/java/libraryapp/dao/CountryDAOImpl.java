@@ -69,9 +69,10 @@ public class CountryDAOImpl implements ICountryDAO{
 				if (rs.next()) {
 					country.setId(rs.getLong(1));
 					country.setName(rs.getString(2));
+					return country;
+				} else {
+				    return null;
 				}
-				
-				return country;
 				
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -91,12 +92,13 @@ public class CountryDAOImpl implements ICountryDAO{
 		try(PreparedStatement ps = DBUtil.openConnection().prepareStatement(sql)){
 			ps.setString(1, value);
 			try (ResultSet rs = ps.executeQuery()) {
-				if (rs.next()) {
-					country.setId(rs.getLong(1));
-					country.setName(rs.getString(2));
-				}
-				
-				return country;
+			    if (rs.next()) {
+                    country.setId(rs.getLong(1));
+                    country.setName(rs.getString(2));
+                    return country;
+                } else {
+                    return null;
+                }
 				
 			} catch (SQLException e) {
 				e.printStackTrace();
