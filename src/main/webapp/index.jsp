@@ -126,7 +126,7 @@
       <div id="searchResults" class="container-xxl mt-5 searchResults">
       </div>
 
-      <div id=" container-xl feedback">
+      <div id="feedback" class="container-xl ">
       </div>
 		</c:when>
 		<c:otherwise>
@@ -144,7 +144,7 @@
       <script src="${pageContext.request.contextPath}/static/js/authorSearch.js?version=41" type="text/javascript"></script>
       <script src="${pageContext.request.contextPath}/static/js/categorySearch.js?version=30" type="text/javascript"></script>
       <script src="${pageContext.request.contextPath}/static/js/isbnSearch.js?version=2" type="text/javascript"></script>
-      <script src="${pageContext.request.contextPath}/static/js/adminBook.js?version=86" type="text/javascript"></script> 
+      <script src="${pageContext.request.contextPath}/static/js/adminBook.js?version=89" type="text/javascript"></script> 
 </body>
 </html>
 

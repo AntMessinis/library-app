@@ -17,6 +17,7 @@ $(document).ready(function(){
 
 function showAddBookForm(){
     showBookForm();
+    $("#bookFormTitle").html("Add a new Title to the Library");
 
 	$('#bookForm').on('submit', function (e){
         e.preventDefault();
@@ -246,7 +247,11 @@ function searchForBookByTitleOrIsbn(){
 }
 
 function showUpdateBookForm(bookData){
+    if ($.isEmptyObject(bookData)){
+        $('#feedback').html('<p class="text-danger">No book was found.</p>')
+    }else{
         showBookForm();
+        $("#bookFormTitle").html("Update Book's Details")
         getCategoriesFromDB();
         getAuthorsFromDB();
         getLanguagesFromDB();
@@ -256,12 +261,13 @@ function showUpdateBookForm(bookData){
         $('#bookFormSubmitButton').on('click', function(){
             updateBook();
         });
-
+        addDeleteButton();
         $('#deleteConfirmation').on('shown.bs.modal', function () {
             $('#deleteBookButton').on('click', function(e){
                 e.preventDefault();
                 deleteBook();
                 $('#deleteConfirmation').modal('hide');
+                resetFields($('#bookForm'));
             });
           });
 
@@ -277,6 +283,8 @@ function showUpdateBookForm(bookData){
         $("#languageSelect option").filter(function (i,e){return $(e).val() === `${bookData.language.languageName}`}).prop('selected', true);
         $('#copiesInLibrary').val(`${bookData.copiesInLibrary}`);
         $('#deleteConfirmationBody').html(`Are you sure you want to delete ${bookData.title}?`)
+    }
+        
 }
 
 function getBookData(bookData){
@@ -321,7 +329,7 @@ function updateBook(){
             if(xhr.status === 200){
                 console.log("status OK")
                 
-                $("#feedback").html(`<p class="text-success">${title} was added successfully to the library!</p>`);
+                $("#feedback").html(`<p class="text-success">${title} was updated successfully!</p>`);
                 resetFields($('#bookForm :input'));
             }else{
                 console.log("status Not OK");
@@ -398,12 +406,17 @@ function deleteBook(){
 
     xhr.send(data);
 }
+function addDeleteButton(){
+    $('#bookFormButtons').append(`<div class="col-md-1">
+    <button type="button" id="bookFormDeleteButton" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteConfirmation">Delete</button>
+</div>`);
+}
 
 //###### UTILITY FUNCTIONS #######
 
 function showBookForm(){
     $('#mainContainer').html(`
-    <h3>Add New Title to Library</h3>
+    <h3 id="bookFormTitle"></h3>
     <form id="bookForm">
         <div class="row">
             <input id=bookId class="visually-hidden form-control me-sm-2" type="number>
@@ -444,9 +457,6 @@ function showBookForm(){
             <div class="col-md-3">
                 <button type="submit" id="bookFormSubmitButton" class="btn btn-primary">Submit</button>
                 <a role="button" class="btn btn-outline-primary" href="/library-app/">Cancel</a>
-            </div>
-            <div class="col-md-1">
-                <button type="button" id="bookFormDeleteButton" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteConfirmation">Delete</button>
             </div>
         </div>          
     </form>
