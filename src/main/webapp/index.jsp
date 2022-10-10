@@ -76,7 +76,7 @@
                   <div class="dropdown-menu">
                     <a class="dropdown-item" type="button" id="adminAddAuthor" href="#">Add Author</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" type="button" id="adminDeleteAuthor" href="#">Search for Author</a>
+                    <a class="dropdown-item" type="button" id="adminSearchForAuthor" href="#">Search for Author</a>
                   </div>
                 </li>
                 <li class="nav-item dropdown">
@@ -144,7 +144,7 @@
       <script src="${pageContext.request.contextPath}/static/js/categorySearch.js?version=30" type="text/javascript"></script>
       <script src="${pageContext.request.contextPath}/static/js/isbnSearch.js?version=2" type="text/javascript"></script>
       <script src="${pageContext.request.contextPath}/static/js/adminBook.js?version=89" type="text/javascript"></script>
-      <script src="${pageContext.request.contextPath}/static/js/adminAuthor.js?version=7" type="text/javascript"></script>
+      <script src="${pageContext.request.contextPath}/static/js/adminAuthor.js?version=14" type="text/javascript"></script>
 </body>
 </html>
 
