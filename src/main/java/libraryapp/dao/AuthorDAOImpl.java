@@ -14,7 +14,7 @@ public class AuthorDAOImpl implements IAuthorDAO{
 
 	@Override
 	public void insert(Author m) throws SQLException {
-		String sql = "insert into authors (author_firstname, author_lastname, origin_country) "
+		String sql = "insert into authors (firstname, lastname, country) "
 				+ "values (?, ?, (select id from countries where country_name=?)) on duplicate key update id=id";
 		try (PreparedStatement ps = DBUtil.openConnection().prepareStatement(sql)){
 			
@@ -33,7 +33,7 @@ public class AuthorDAOImpl implements IAuthorDAO{
 
 	@Override
 	public void update(Author m) throws SQLException {
-		String sql = "update authors set author_firstname=?, author_lastname=?, country=? where id=?";
+		String sql = "update authors set firstname=?, lastname=?, country=? where id=?";
 		try	(PreparedStatement ps = DBUtil.openConnection().prepareStatement(sql)){
 			
 			ps.setString(1, m.getFirstname());
