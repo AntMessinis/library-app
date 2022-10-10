@@ -11,11 +11,6 @@ $(document).ready(function(){
         clearSearchResults();
         showSearchBookForm();
     });
-
-    $('#adminDeleteBook').on('click', function(){
-        showSearchBookForm();
-        //showDeleteBookForm();
-    });
 });
 
 //####### ADD BOOK FUNCTIONS #######
@@ -224,8 +219,8 @@ function searchForBookByTitleOrIsbn(){
     let bookTitle = $('#searchBookTitle').val().trim();
     let bookIsbn = $('#searchBookIsbn').val().trim();
 
-    let jsonKey = `${bookTitle.length > 0 ? 'title' : 'isbn'}`;
-    let value = `${bookTitle.length > 0 ? bookTitle : bookIsbn}`;
+    //let jsonKey = `${bookTitle.length > 0 ? 'title' : 'isbn'}`;
+    //let value = `${bookTitle.length > 0 ? bookTitle : bookIsbn}`;
 
     let xhr = new XMLHttpRequest();
     xhr.open('POST', `getbook`, true);
@@ -262,13 +257,26 @@ function showUpdateBookForm(bookData){
             updateBook();
         });
 
+        $('#deleteConfirmation').on('shown.bs.modal', function () {
+            $('#deleteBookButton').on('click', function(e){
+                e.preventDefault();
+                deleteBook();
+                $('#deleteConfirmation').modal('hide');
+            });
+          });
+
+        $("#bookId").val(`${bookData.id}`);
         $('#bookTitle').val(`${bookData.title}`);
         $('#bookIsbn').val(`${bookData.isbn}`);
         $('#bookDescription').val(`${bookData.description}`);
-        $(`#authorSelect option[value="${bookData.author.lastname}, ${bookData.author.firstname}, ${bookData.author.countryOfOrigin.countryName}"]`).prop('selected', true);
-        $(`#categorySelect option[value="${bookData.category.categoryName},${bookData.category.subcategoryName}"]`).prop('selected', true);
-        $(`#authorSelect option[value="${bookData.language.languageName}"]`).prop('selected', true);
+        $('#authorId').val(`${bookData.author.id}`);
+        $('#authorSelect option').filter(function (i,e){return $(e).val() === `${bookData.author.lastname}, ${bookData.author.firstname}, ${bookData.author.countryOfOrigin.countryName}`}).prop('selected', true);
+        $('#categoryId').val(`${bookData.category.id}`);
+        $("#categorySelect option").filter(function (i,e){return $(e).val() === `${bookData.category.categoryName}, ${bookData.category.subcategoryName}`}).prop('selected', true);
+        $('#languageId').val(`${bookData.language.id}`);
+        $("#languageSelect option").filter(function (i,e){return $(e).val() === `${bookData.language.languageName}`}).prop('selected', true);
         $('#copiesInLibrary').val(`${bookData.copiesInLibrary}`);
+        $('#deleteConfirmationBody').html(`Are you sure you want to delete ${bookData.title}?`)
 }
 
 function getBookData(bookData){
@@ -280,12 +288,15 @@ function getBookData(bookData){
 }
 
 function updateBook(){
+    let id = $('#bookId').val();
     let title = $('#bookTitle').val().trim();
     let isbn = $('#bookIsbn').val().trim();
     let description = $('#bookDescription').val().trim();
+    let categoryId = $("#categoryId").val();
     let category = $('#categorySelect option:selected').val();
     let categoryName = category.substring(0, category.indexOf(',')).trim();
     let subcategoryName = category.substring(category.indexOf(',') + 1).trim();
+    let authorId = $("#authorId").val();
     let author = $('#authorSelect option:selected').val().trim();
 
     let firstCommaIndex = author.indexOf(",");
@@ -295,6 +306,7 @@ function updateBook(){
     let firstname = author.substring(firstCommaIndex + 1, secondCommaIndex).trim();
     let countryName = author.substring(secondCommaIndex + 1).trim();
 
+    let languageId = $("#languageId").val();
     let languageName = $("#languageSelect option:selected").text();
     let copiesInLibrary = $('#addCopiesInLibrary').val();
 
@@ -318,18 +330,74 @@ function updateBook(){
         }
     }
     var data = JSON.stringify({
+        "id":id,
         "title":title,
         "isbn": isbn,
-        "author": {"firstname": firstname, "lastname": lastname, "countryOfOrigin":{"countryName": countryName}},
-        "category": {"categoryName": categoryName, "subcategoryName": subcategoryName},
+        "author": {"id":authorId,"firstname": firstname, "lastname": lastname, "countryOfOrigin":{"countryName": countryName}},
+        "category": {"id": categoryId, "categoryName": categoryName, "subcategoryName": subcategoryName},
         "description": description,
-        "language": {"languageName": languageName},
-        "copiesInLibrary": copiesInLibrary,
-        "currentlyBorrowed": 0                 
+        "language": {"id": languageId ,"languageName": languageName},
+        "copiesInLibrary": copiesInLibrary    
     });
   xhr.send(data);
 }
 
+//###### DELETE FUCNTIONS #######
+
+function deleteBook(){
+    let id = $('#bookId').val();
+    let title = $('#bookTitle').val().trim();
+    let isbn = $('#bookIsbn').val().trim();
+    let description = $('#bookDescription').val().trim();
+    let categoryId = $("#categoryId").val();
+    let category = $('#categorySelect option:selected').val();
+    let categoryName = category.substring(0, category.indexOf(',')).trim();
+    let subcategoryName = category.substring(category.indexOf(',') + 1).trim();
+    let authorId = $("#authorId").val();
+    let author = $('#authorSelect option:selected').val().trim();
+
+    let firstCommaIndex = author.indexOf(",");
+    let secondCommaIndex =author.lastIndexOf(",");
+
+    let lastname = author.substring(0,firstCommaIndex).trim();
+    let firstname = author.substring(firstCommaIndex + 1, secondCommaIndex).trim();
+    let countryName = author.substring(secondCommaIndex + 1).trim();
+
+    let languageId = $("#languageId").val();
+    let languageName = $("#languageSelect option:selected").text();
+    let copiesInLibrary = $('#addCopiesInLibrary').val();
+
+
+    let xhr = new XMLHttpRequest();
+    xhr.open('POST', 'delete-book', true)
+    xhr.timeout = 10000;
+    xhr.ontimeout = (e) => APIError();
+    xhr.setRequestHeader('Content-Type','application/json;charset=UTF-8');
+
+    xhr.onreadystatechange = function(){
+        if(xhr.readyState === 4){
+            if(xhr.status === 200){
+                console.log('Status OK');
+                $('#feedback').html('<p class="text-success">Book Deleted Successfully</p>');
+                resetFields($('#bookForm'));
+            } else {
+                APIError();
+            }
+        }
+    }
+    var data = JSON.stringify({
+        "id":id,
+        "title":title,
+        "isbn": isbn,
+        "author": {"id":authorId,"firstname": firstname, "lastname": lastname, "countryOfOrigin":{"countryName": countryName}},
+        "category": {"id": categoryId, "categoryName": categoryName, "subcategoryName": subcategoryName},
+        "description": description,
+        "language": {"id": languageId ,"languageName": languageName},
+        "copiesInLibrary": copiesInLibrary    
+    });
+
+    xhr.send(data);
+}
 
 //###### UTILITY FUNCTIONS #######
 
@@ -338,40 +406,69 @@ function showBookForm(){
     <h3>Add New Title to Library</h3>
     <form id="bookForm">
         <div class="row">
+            <input id=bookId class="visually-hidden form-control me-sm-2" type="number>
+        </div>
+        <div class="row align-items-center">
         <div class="col-4">  
         <label for="bookTitle" class="form-label mt-3">Title</label>
-        <input id="bookTitle" class="form-control me-sm-2" type="text" placeholder="Title"></div>
+        <input id="bookTitle" class="form-control me-sm-2" type="text" placeholder="Title">
+        </div>
         <div class="col-4">  
         <label for="bookIsbn" class="form-label mt-3">ISBN</label>
         <input id="bookIsbn" class="form-control me-sm-2" type="text" placeholder="ISBN"></div>
-        <div class="col-4">  
+        <div class="col-4">
+        <input id=authorId class="visually-hidden form-control me-sm-2" type="number> 
         <label for="authorSelect" class="form-label mt-3">Author</label>
         <select class="form-select" id="authorSelect" placeholder="Choose Author">        
         </select></div>
         </div>
-        <div class="row">
-        <div class="col-4">  
+        <div class="row align-items-center">
+        <div class="col-4">
+        <input id=categoryId class="visually-hidden form-control me-sm-2" type="number>   
         <label for="categorySelect" class="form-label mt-3">Category</label>
         <select class="form-select" id="categorySelect" placeholder="Choose Category">
         </select></div>
-        <div class="col-4">  
+        <div class="col-4">
+        <input id=languageId class="visually-hidden form-control me-sm-2" type="number>   
         <label for="languageSelect" class="form-label mt-3">Language</label>
         <select class="form-select" id="languageSelect" placeholder="Choose Language">        
         </select></div>
         <div class="col-4">  
         <label for="copiesInLibrary" class="form-label mt-3">Copies in Library</label>
-        <input id="copiesInLibrary" class="form-control me-sm-2" type="number" min="1" max="20 style="-moz-appearance: textfield; -webkit-appearance: none;">
+        <input id="copiesInLibrary" class="form-control me-sm-2" type="number" min="1" max="20">
         </div>
         </div>
-        <div class="row"><label for="bookDescription" class="form-label mt-3">Description</label>
+        <div class="row align-items-center"><label for="bookDescription" class="form-label mt-3">Description</label>
         <textarea id="bookDescription" class="form-control me-sm-2" placeholder="Description" rows="10"></textarea></div>
-        <div class="form-group row mt-3">
+        <div id="bookFormButtons" class="form-group row mt-3 justify-content-between">
             <div class="col-md-3">
                 <button type="submit" id="bookFormSubmitButton" class="btn btn-primary">Submit</button>
                 <a role="button" class="btn btn-outline-primary" href="/library-app/">Cancel</a>
             </div>
+            <div class="col-md-1">
+                <button type="button" id="bookFormDeleteButton" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteConfirmation">Delete</button>
+            </div>
         </div>          
-    </form>`);
+    </form>
+    <div class="modal fade" id="deleteConfirmation" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="deleteConfirmationLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="deleteConfirmationLabel">Confirm Delete</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div id="deleteConfirmationBody" class="modal-body">
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" id="deleteBookButton" class="btn btn-danger">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+    `);
 }
 
 function clearSearchResults(){

@@ -39,7 +39,7 @@ public class UpdateBookController extends HttpServlet {
 	        }
 	        
 	        ObjectMapper mapper = new ObjectMapper();
-	        //mapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
+	        mapper.enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT);
 	        try {
 	            BookDTO dto = mapper.readValue(requestJson.toString(), BookDTO.class);
 	            bookService.update(dto);

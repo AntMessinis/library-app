@@ -67,9 +67,8 @@
                   <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Books</a>
                   <div class="dropdown-menu">
                     <a class="dropdown-item" type="button" id="adminAddBook" href="#">Add Book</a>
-                    <a class="dropdown-item" type="button" id="adminUpdateBook" href="#">Update Book Details</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item text-danger" id="adminDeleteBook" href="#">Delete Book from database</a>
+                    <a class="dropdown-item" type="button" id="adminUpdateBook" href="#">Update / Delete Book</a>
                   </div>
                 </li>
                 <li class="nav-item dropdown">
@@ -140,12 +139,12 @@
       
 
       <script src="${pageContext.request.contextPath}/static/js/jQuery.min.js?version=2"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
       <script src="${pageContext.request.contextPath}/static/js/titleSearch.js?version=27" type="text/javascript"></script>
       <script src="${pageContext.request.contextPath}/static/js/authorSearch.js?version=41" type="text/javascript"></script>
       <script src="${pageContext.request.contextPath}/static/js/categorySearch.js?version=30" type="text/javascript"></script>
       <script src="${pageContext.request.contextPath}/static/js/isbnSearch.js?version=2" type="text/javascript"></script>
-      <script src="${pageContext.request.contextPath}/static/js/adminBook.js?version=51" type="text/javascript"></script> 
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+      <script src="${pageContext.request.contextPath}/static/js/adminBook.js?version=86" type="text/javascript"></script> 
 </body>
 </html>
 
