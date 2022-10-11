@@ -1,9 +1,12 @@
+//import {handleBookAuthorSearchResults} from './authorSearch';
 $(document).ready(function(){
     $('#adminAddAuthor').on('click', function(){
+        clearFeedback();
         showNewAuthorForm();
     });
 
     $('#adminSearchForAuthor').on('click', function(){
+        clearFeedback();
         getAuthorListFromDB();
     });
 });
@@ -18,7 +21,7 @@ function showNewAuthorForm(){
                     <input id="authorFirstname" class="form-control me-sm-2" type="text">
                 </div>
                 <div class="col-4">
-                    <label for="authorLastname" class="form-label mt-3">Firstname</label>
+                    <label for="authorLastname" class="form-label mt-3">Lastname</label>
                     <input id="authorLastname" class="form-control me-sm-2" type="text">
                 </div>
             </div>
@@ -94,7 +97,7 @@ function addAuthor(){
         if(xhr.readyState === 4){
             if(xhr.status === 200){
                 console.log('Status OK');
-                clearForm('#authorForm');
+                clearForm($('#authorForm :input'));
                 $('#feedback').html(`<p class=text-success>Author ${firstname} ${lastname} was added successfully to the database</p>`);
             } else {
                 console.log('Status not OK');
@@ -152,17 +155,23 @@ function showAuthorList(authors){
             <td class="author-firstname">${author.firstname}</td>
             <td class="author-lastname">${author.lastname}</td>
             <td class="author-country">${author.countryOfOrigin.name}</td>
-            <td><a id="authorBooks" class="btn btn-primary">Show Books</a></td>
-            <td><a type="button" id="authorDelete${author.id}" class="btn btn-danger">Delete</a></td>
+            <td><a id="authorBooks${author.id}" class="btn btn-primary">Show Books</a></td>
+            <td><a id="authorDelete${author.id}" class="btn btn-danger">Delete</a></td>
           </tr>`;
-
-          $(`#authorDelete${author.id}`).on('click', function(){
-            deleteAuthor(author.id, author.firstname, author.lastname, author.countryOfOrigin.name);
-            $(`tableRow${author.id}`).remove();
-        })
         }
         output += '</tbody></table>';
         $('#mainContainer').html(output);
+
+        for (let author of authors){
+            $(`#authorDelete${author.id}`).on('click', function(){
+                $(`#tableRow${author.id}`).remove();
+                deleteAuthor(author.id, author.firstname, author.lastname, author.countryOfOrigin.name);
+                });
+
+            $(`#authorBooks${author.id}`).on('click', function(){
+                getAuthorsBooksFromDB(author.id, author.firstname, author.lastname, author.countryOfOrigin.name)
+            });
+        }
 
         
     }
@@ -178,7 +187,6 @@ function deleteAuthor(id, firstname, lastname, country){
         if(xhr.readyState === 4){
             if(xhr.status === 200){
                 console.log('Status OK');
-                this.closest('tr').remove();
             }
         }else {
             console.log('Status not OK');
@@ -189,12 +197,46 @@ function deleteAuthor(id, firstname, lastname, country){
         "id":id,
         "firstname":firstname,
         "lastname": lastname,
-        "countryOfOrigin":{"name":country}
+        "countryOfOrigin":{"countryName":country}
     });
     
     xhr.send(data);
 }
 
-function clearForm(selector){
-    selector.val('');
+
+function getAuthorsBooksFromDB(id, firstname, lastname, country){
+    let xhr = new XMLHttpRequest();
+    xhr.open('GET', 'searchByAuthor', true);
+    xhr.timeout = 10000;
+    xhr.ontimeout = (e)=> $('#feedback').html("<p class=text-danger>Something went wrong.</p>");
+    xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+    xhr.onreadystatechange = function(){
+        if(xhr.readyState === 4){
+            if(xhr.status === 200){
+                console.log('Status OK');
+                handleBookAuthorSearchResults(JSON.parse(xhr.responseText));
+            }
+        }else {
+            console.log('Status not OK');
+        }
+    }
+
+    let data = JSON.stringify({
+        "id":id,
+        "firstname":firstname,
+        "lastname": lastname,
+        "countryOfOrigin":{"countryName":country}
+    });
+    
+    xhr.send(data);
+}
+
+
+
+function clearForm(jQueryFormSelector){
+        jQueryFormSelector.val('');
+}
+
+function clearFeedback(){
+    $('#feedback').html('');
 }

@@ -20,7 +20,7 @@ import libraryapp.service.IAuthorService;
 /**
  * Servlet implementation class DeleteAuthorController
  */
-@WebServlet("/DeleteAuthorController")
+@WebServlet("/delete-author")
 public class DeleteAuthorController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     private final IAuthorDAO authorDAO = new AuthorDAOImpl();
