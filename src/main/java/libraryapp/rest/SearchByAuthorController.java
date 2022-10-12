@@ -53,7 +53,5 @@ public class SearchByAuthorController extends HttpServlet {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
 	}
-
 }

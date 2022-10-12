@@ -13,7 +13,7 @@ public class SubcategoryDAOImpl implements ISubcategoryDAO{
 
 	@Override
 	public void insert(Subcategory m) throws SQLException {
-		String sql = "insert into Subcategories (subcategory_name, category) values (?, (select id from categories where category_name=?)";
+		String sql = "insert into Subcategories (subcategory_name, category) values (?, (select id from categories where category_name=?)) on duplicate key update id=id";
 		
 		try (PreparedStatement ps = DBUtil.openConnection().prepareStatement(sql)){
 			ps.setString(1, m.getSubcategoryName());

@@ -169,7 +169,7 @@ function showAuthorList(authors){
                 });
 
             $(`#authorBooks${author.id}`).on('click', function(){
-                getAuthorsBooksFromDB(author.id, author.firstname, author.lastname, author.countryOfOrigin.name)
+                getAuthorsBooksFromDB(author.lastname)
             });
         }
 
@@ -204,34 +204,42 @@ function deleteAuthor(id, firstname, lastname, country){
 }
 
 
-function getAuthorsBooksFromDB(id, firstname, lastname, country){
+function getAuthorsBooksFromDB(lastname){
     let xhr = new XMLHttpRequest();
-    xhr.open('GET', 'searchByAuthor', true);
+    xhr.open('GET', `/library-app/searchByAuthor?author=${lastname}`, true);
     xhr.timeout = 10000;
     xhr.ontimeout = (e)=> $('#feedback').html("<p class=text-danger>Something went wrong.</p>");
-    xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
     xhr.onreadystatechange = function(){
         if(xhr.readyState === 4){
             if(xhr.status === 200){
                 console.log('Status OK');
-                handleBookAuthorSearchResults(JSON.parse(xhr.responseText));
+                showAuthorBookList(JSON.parse(xhr.responseText));
             }
         }else {
             console.log('Status not OK');
         }
     }
-
-    let data = JSON.stringify({
-        "id":id,
-        "firstname":firstname,
-        "lastname": lastname,
-        "countryOfOrigin":{"countryName":country}
-    });
     
-    xhr.send(data);
+    xhr.send();
 }
 
-
+function showAuthorBookList(bookList){
+    if ($.isEmptyObject(bookList)){
+        $("#feedback").html("<p>No book was found</p>")
+    }else {
+        let output = `<div class="row mb-5 align-items-center text-center">`;
+        for (let book of bookList){
+            output += `<div class="col-4 h-75 d-inline-block mt-5 align-items-center ">
+            <h4>${book.title}</h4>` 
+            +'<img src="/library-app/static/imgs/tumbnail.jpg" alt="bookPic">'
+            + `<p>In Library: ${book.copiesInLibrary}</p>
+            <p>Currently Borrowed: ${book.copiesCurrentlyBorrowed}</p></div>
+            `
+        }
+        output += "</div>";
+        $("#mainContainer").html(output);
+    }
+}
 
 function clearForm(jQueryFormSelector){
         jQueryFormSelector.val('');
