@@ -145,7 +145,7 @@
       <script src="${pageContext.request.contextPath}/static/js/isbnSearch.js?version=2" type="text/javascript"></script>
       <script src="${pageContext.request.contextPath}/static/js/adminBook.js?version=89" type="text/javascript"></script>
       <script src="${pageContext.request.contextPath}/static/js/adminAuthor.js?version=34" type="text/javascript"></script>
-      <script src="${pageContext.request.contextPath}/static/js/adminCategory.js?version=14 type="text/javascript"></script>
+      <script src="${pageContext.request.contextPath}/static/js/adminCategory.js?version=15 type="text/javascript"></script>
 </body>
 </html>
 

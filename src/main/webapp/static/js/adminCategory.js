@@ -128,6 +128,32 @@ function showCategoryList(categories){
     }
 }
 
+function deleteCategory(id, subcategoryName, categoryName){
+    let xhr = new XMLHttpRequest();
+    xhr.open('POST', 'category-delete', true);
+    xhr.timeout = 10000;
+    xhr.ontimeout = (e) => APIError();
+    xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+    xhr.onreadystatechange = function(){
+        if(xhr.readyState === 4){
+            if(xhr.status === 200){
+                console.log('Status OK');
+                $('#feedback').html(`<p class="text-success">Category ${subcategoryName} was deleted successfully</p>`)
+            } else {
+                console.log('Status not OK');
+            }
+        }
+    }
+
+    let data = JSON.stringify({
+        "id":id,
+        "subcategoryName":subcategoryName,
+        "categoryName": categoryName
+    });
+
+    xhr.send(data);
+}
+
 function getBooksFromDB(category){
     let xhr = new XMLHttpRequest()
     xhr.open('GET', `/library-app/searchByCategory?category=${category}`, true)
