@@ -23,3 +23,11 @@ All primary key related information is given through an options list
 Searching for title to update / delete
 ![8](https://user-images.githubusercontent.com/84563107/196004935-e1e390e4-0670-4478-a233-57dfff62ebf9.png)
 ![10](https://user-images.githubusercontent.com/84563107/196004941-c0bb7d5e-5959-4856-8888-c0223aeb168c.png)
+
+Adding New Author / Viewing the list of availiable Authors
+![11](https://user-images.githubusercontent.com/84563107/196005016-d0166664-b290-406b-881b-3b966b3e869a.png)
+![12](https://user-images.githubusercontent.com/84563107/196005018-239057e3-f482-4d21-b315-ae76024616e3.png)
+
+Adding New Category / Viewing the list of availiable Categories
+![13](https://user-images.githubusercontent.com/84563107/196005042-55149d8c-252a-4d21-b1de-4d46d3703132.png)
+![14](https://user-images.githubusercontent.com/84563107/196005046-476b6b68-374d-4735-8001-a2a050c9b901.png)
