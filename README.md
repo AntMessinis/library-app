@@ -7,3 +7,4 @@ Library App is a web application where you can register, log in as a member or a
 The goal for this project is to function mostly as a Single Page Application. Most of the functions implemented work by sending or requesting data as json to/from rest servlets.  
 
 I'm also using JavaScript with jQuery to prossess the data but I'm planning to remake the whole project in .NET with Blazor, WEBApi and Entity Framework.
+![1](https://user-images.githubusercontent.com/84563107/196004652-a1551ca4-50b1-4e0a-8804-633f0a1abc44.png)
