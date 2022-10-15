@@ -40,12 +40,13 @@ function handleBookTitleSearchResults(response){
             <img src="/library-app/static/imgs/tumbnail.jpg" alt="bookPic">
           </div>
           <div class="col-5">
+            <p class="display-6"><span class="fw-bold text-decoration-underline">LibraryID:</span> ${book.id}</p>
             <p class="display-6"><span class="fw-bold text-decoration-underline">Author:</span> ${book.author.lastname}, ${book.author.firstname}</p>
             <p class="display-6"><span class="fw-bold text-decoration-underline">ISBN:</span> ${book.isbn}</p>
             <p class="display-6"><span class="fw-bold text-decoration-underline">Category:</span> ${book.category.categoryName}, ${book.category.subcategoryName}</p>
             <p class="display-6"><span class="fw-bold text-decoration-underline">Language:</span> ${book.language.languageName}</p>
             <p class="display-6"><span class="fw-bold text-decoration-underline">Copies availiable:</span> ${book.copiesInLibrary}</p>
-            <a type="button" class="btn btn-primary" href="">Request to borrow</a>
+            <a type="button" class="btn btn-primary" id="borrowButton">Request to borrow</a>
           </div>
         </div>
         <div class="row mt-5">
@@ -55,7 +56,53 @@ function handleBookTitleSearchResults(response){
         </div>`;
 
         $("#searchResults").html(output);
+        $('#borrowButton').on('click', function(){
+            borrowBook(book);
+        });
     }
+}
+
+function borrowBook(book){
+    let xhr = new XMLHttpRequest();
+    xhr.open('POST', 'borrow', true);
+    xhr.timeout = 10000;
+    xhr.ontimeout = APIError();
+    xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+    xhr.onreadystatechange = function(){
+        if(xhr.readyState === 4){
+            if(xhr.status === 200){
+                console.log('Status OK');
+            }else{
+                console.log('Status not OK');
+            }
+        }
+    }
+    let data = JSON.stringify({
+        "id":book.id,
+        "title":book.title,
+        "isbn": book.isbn,
+        "author": {
+            "id": book.author.id,
+            "firstname":book.author.firstname,
+            "lastname": book.author.lastname,
+            "countryOfOrigin": {
+                "id": book.author.countryOfOrigin.id,
+                "countryName": book.author.countryOfOrigin.countryName
+            }
+        },
+        "language":{
+            "id": book.language.id,
+            "languageName": book.language.languageName
+        },
+        "category":{
+            "id":book.category.id,
+            "categoryName": book.category.categoryName,
+            "subcategoryName": book.category.subcategoryName
+        },
+        "copiesInLibrary": book.copiesInLibrary,
+        "currentlyBorrowed": book.currentlyBorrowed
+    })
+    xhr.send(data);
 }
 
 function APIError(){

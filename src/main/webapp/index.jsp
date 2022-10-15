@@ -139,11 +139,11 @@
 
       <script src="${pageContext.request.contextPath}/static/js/jQuery.min.js?version=2"></script>
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
-      <script src="${pageContext.request.contextPath}/static/js/titleSearch.js?version=27" type="text/javascript"></script>
+      <script src="${pageContext.request.contextPath}/static/js/titleSearch.js?version=33" type="text/javascript"></script>
       <script src="${pageContext.request.contextPath}/static/js/authorSearch.js?version=42" type="text/javascript"></script>
       <script src="${pageContext.request.contextPath}/static/js/categorySearch.js?version=30" type="text/javascript"></script>
       <script src="${pageContext.request.contextPath}/static/js/isbnSearch.js?version=2" type="text/javascript"></script>
-      <script src="${pageContext.request.contextPath}/static/js/adminBook.js?version=89" type="text/javascript"></script>
+      <script src="${pageContext.request.contextPath}/static/js/adminBook.js?version=90" type="text/javascript"></script>
       <script src="${pageContext.request.contextPath}/static/js/adminAuthor.js?version=34" type="text/javascript"></script>
       <script src="${pageContext.request.contextPath}/static/js/adminCategory.js?version=15 type="text/javascript"></script>
 </body>

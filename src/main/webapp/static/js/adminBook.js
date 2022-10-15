@@ -1,6 +1,7 @@
 $(document).ready(function(){
     $('#adminAddBook').on('click', function(){
-        clearSearchResults()
+        clearSearchResults();
+        clearFeedback();
         showAddBookForm();
         getCategoriesFromDB();
         getAuthorsFromDB();
@@ -9,6 +10,7 @@ $(document).ready(function(){
 
     $('#adminUpdateBook').on('click', function(){
         clearSearchResults();
+        clearFeedback();
         showSearchBookForm();
     });
 });
@@ -145,7 +147,7 @@ function addBookToDB(){
     let countryName = author.substring(secondCommaIndex + 1).trim();
 
     let languageName = $("#languageSelect option:selected").text();
-    let copiesInLibrary = $('#addCopiesInLibrary').val();
+    let copiesInLibrary = $('#copiesInLibrary').val();
 
     let xhr = new XMLHttpRequest();
     xhr.open('POST', 'add-book', true);
@@ -316,7 +318,7 @@ function updateBook(){
 
     let languageId = $("#languageId").val();
     let languageName = $("#languageSelect option:selected").text();
-    let copiesInLibrary = $('#addCopiesInLibrary').val();
+    let copiesInLibrary = $('#copiesInLibrary').val();
 
     let xhr = new XMLHttpRequest();
     xhr.open('POST', 'update-book', true);
@@ -373,7 +375,7 @@ function deleteBook(){
 
     let languageId = $("#languageId").val();
     let languageName = $("#languageSelect option:selected").text();
-    let copiesInLibrary = $('#addCopiesInLibrary').val();
+    let copiesInLibrary = $('#copiesInLibrary').val();
 
 
     let xhr = new XMLHttpRequest();

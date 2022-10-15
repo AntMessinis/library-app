@@ -1,12 +1,19 @@
 package libraryapp.model;
 
+import libraryapp.dto.SubcategoryDTO;
+
 public class Subcategory extends Category{
 	private String subcategoryName;
 
 	public Subcategory() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
+	
+	public Subcategory(SubcategoryDTO sub) {
+	    super(sub.getCategoryName());
+	    this.subcategoryName = sub.getSubcategoryName();
+	}
+	
 	public Subcategory(String subcategoryName) {
        this.subcategoryName = subcategoryName;
     }

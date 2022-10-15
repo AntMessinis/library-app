@@ -13,4 +13,5 @@ public interface IGenericDAO<M extends AbstractEntity> {
 	M getInstanceByStrField(String fieldName,String value) throws SQLException;
 	List<M> getAll() throws SQLException;
 	List<M> getListByField(String fieldName, String value) throws SQLException;
+	
 }

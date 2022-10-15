@@ -138,7 +138,7 @@ function deleteCategory(id, subcategoryName, categoryName){
         if(xhr.readyState === 4){
             if(xhr.status === 200){
                 console.log('Status OK');
-                $('#feedback').html(`<p class="text-success">Category ${subcategoryName} was deleted successfully</p>`)
+                $('#feedback').html(`<p class="text-success">Category ${subcategoryName} was deleted successfully</p>`);
             } else {
                 console.log('Status not OK');
             }

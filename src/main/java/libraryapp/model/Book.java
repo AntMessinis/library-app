@@ -1,5 +1,7 @@
 package libraryapp.model;
 
+import libraryapp.dto.BookDTO;
+
 public class Book extends AbstractEntity{
 	private String title;
 	private String isbn;
@@ -13,6 +15,18 @@ public class Book extends AbstractEntity{
 	
 	public Book() {
 		super();
+	}
+	
+	public Book(BookDTO book) {
+	    this.id = book.getId();
+        this.title = book.getTitle();
+        this.isbn = book.getTitle();
+        this.author = new Author(book.getAuthor());
+        this.language = new Language(book.getLanguage());
+        this.category = new Subcategory(book.getCategory());
+        this.description = book.getDescription();
+        this.copiesInLibrary = book.getCopiesInLibrary();
+        this.currentlyBorrowed = book.getCurrentlyBorrowed();
 	}
 	
 	

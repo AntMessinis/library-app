@@ -1,5 +1,7 @@
 package libraryapp.model;
 
+import libraryapp.dto.AuthorDTO;
+
 public class Author extends AbstractEntity{
 	private String firstname;
 	private String lastname;
@@ -8,6 +10,13 @@ public class Author extends AbstractEntity{
 	public Author() {
 		super();
 	}
+	
+	public Author(AuthorDTO author) {
+	    this.firstname = author.getFirstname();
+        this.lastname = author.getLastname();
+        this.countryOfOrigin = new Country(author.getCountryOfOrigin());
+	}
+	
 	public Author(String firstname, String lastname) {
         this.firstname  = firstname;
         this.lastname = lastname;

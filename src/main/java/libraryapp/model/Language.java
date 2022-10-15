@@ -1,11 +1,16 @@
 package libraryapp.model;
 
+import libraryapp.dto.LanguageDTO;
+
 public class Language extends AbstractEntity{
 	private String languageName;
 
 	public Language() {
 		super();
-		// TODO Auto-generated constructor stub
+	}
+	
+	public Language(LanguageDTO lang) {
+	    this.languageName = lang.getLanguageName();
 	}
 	
 	public Language(long id, String languageName) {

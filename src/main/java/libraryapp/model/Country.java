@@ -1,28 +1,34 @@
 package libraryapp.model;
 
+import libraryapp.dto.CountryDTO;
+
 public class Country extends AbstractEntity{
-	private String name;
+	private String countryName;
 	
 	public Country() {
 		super();
 	}
 	
+	public Country(CountryDTO country) {
+	    this.countryName = country.getCountryName();
+	}
+	
 	public Country(long id,String name) {
 		super(id);
-		this.name = name;
+		this.countryName = name;
 	}
 	
 	public Country(String name) {
 		super();
-		this.name = name;
+		this.countryName = name;
 	}
 	
 	public String getName() {
-		return name;
+		return countryName;
 	}
 
 	public void setName(String name) {
-		this.name = name;
+		this.countryName = name;
 	}
 
 	@Override
@@ -30,7 +36,7 @@ public class Country extends AbstractEntity{
 		final int prime = 31;
 		int result = 17;
 		
-		result = prime * result + name.hashCode();
+		result = prime * result + countryName.hashCode();
 		result = prime * result + (int)(id^(id >>> 32));
 		return result;
 	}
@@ -44,12 +50,12 @@ public class Country extends AbstractEntity{
 		if (getClass() != obj.getClass())
 			return false;
 		Country other = (Country) obj;
-		return this.name.equals(other.name);
+		return this.countryName.equals(other.countryName);
 	}
 
 	@Override
 	public String toString() {
-		return this.name;
+		return this.countryName;
 	}
 	
 	
