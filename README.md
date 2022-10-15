@@ -13,3 +13,12 @@ This is the Home page with no logged user.
 
 This is the Home page with a logged user who is a simple member and not an Admin. This type of user can only search for books and borrow if availiable
 ![2](https://user-images.githubusercontent.com/84563107/196004701-0d734e68-54d2-488f-827b-1c21fee594c6.png)
+
+
+If an Admin logs in there is an extra panel with various CRUD fanctionalities.
+![3](https://user-images.githubusercontent.com/84563107/196004765-48935a90-fba3-44f6-a2bb-639402607fe2.png)
+
+You can search for a book (or for a collection of books) using title, isbn, author's name or bokks's category
+
+![4](https://user-images.githubusercontent.com/84563107/196004839-4793fbd0-cdf9-4cb1-afd1-c9823e0a08fe.png)
+![5](https://user-images.githubusercontent.com/84563107/196004843-0f460d73-2c5b-4a79-a7d9-01128df21850.png)
