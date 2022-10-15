@@ -80,11 +80,11 @@ public class BorrowDetailsDAOImpl implements IBorrowDetailsDAO{
             
             try(ResultSet rs = ps.executeQuery()){
                 if (rs.next()) {
-                    Country country = new Country(rs.getLong(20), rs.getString(21));
-                    Author author = new Author(rs.getLong(16), rs.getString(17),rs.getString(18), country);
-                    Language language = new Language(rs.getLong(22), rs.getString(23));
-                    Subcategory category = new Subcategory(rs.getLong(24), rs.getString(25), rs.getString(28));
-                    Book book = new Book(rs.getLong(7),rs.getString(8), rs.getString(9), author, language, category, rs.getString(13), rs.getInt(14), rs.getInt(15));
+                    Country country = new Country(rs.getLong(21), rs.getString(22));
+                    Author author = new Author(rs.getLong(17), rs.getString(18),rs.getString(19), country);
+                    Language language = new Language(rs.getLong(23), rs.getString(24));
+                    Subcategory category = new Subcategory(rs.getLong(25), rs.getString(26), rs.getString(29));
+                    Book book = new Book(rs.getLong(8),rs.getString(9), rs.getString(10), author, language, category, rs.getString(14), rs.getInt(15), rs.getInt(16));
                     BorrowDetails details = new BorrowDetails(rs.getLong(1), rs.getLong(2), book, 
                             new java.util.Date(rs.getDate(4).getTime()), 
                             new java.util.Date(rs.getDate(5).getTime()), 
@@ -117,11 +117,11 @@ public class BorrowDetailsDAOImpl implements IBorrowDetailsDAO{
             
             try(ResultSet rs = ps.executeQuery()){
                 if (rs.next()) {
-                    Country country = new Country(rs.getLong(20), rs.getString(21));
-                    Author author = new Author(rs.getLong(16), rs.getString(17),rs.getString(18), country);
-                    Language language = new Language(rs.getLong(22), rs.getString(23));
-                    Subcategory category = new Subcategory(rs.getLong(24), rs.getString(25), rs.getString(28));
-                    Book book = new Book(rs.getLong(7),rs.getString(8), rs.getString(9), author, language, category, rs.getString(13), rs.getInt(14), rs.getInt(15));
+                    Country country = new Country(rs.getLong(21), rs.getString(22));
+                    Author author = new Author(rs.getLong(17), rs.getString(18),rs.getString(19), country);
+                    Language language = new Language(rs.getLong(23), rs.getString(24));
+                    Subcategory category = new Subcategory(rs.getLong(25), rs.getString(26), rs.getString(29));
+                    Book book = new Book(rs.getLong(8),rs.getString(9), rs.getString(10), author, language, category, rs.getString(14), rs.getInt(15), rs.getInt(16));
                     BorrowDetails details = new BorrowDetails(rs.getLong(1), rs.getLong(2), book, 
                             new java.util.Date(rs.getDate(4).getTime()), 
                             new java.util.Date(rs.getDate(5).getTime()), 
@@ -157,11 +157,11 @@ public class BorrowDetailsDAOImpl implements IBorrowDetailsDAO{
             try(ResultSet rs = ps.executeQuery()){
                 
                 while (rs.next()) {
-                    Country country = new Country(rs.getLong(20), rs.getString(21));
-                    Author author = new Author(rs.getLong(16), rs.getString(17),rs.getString(18), country);
-                    Language language = new Language(rs.getLong(22), rs.getString(23));
-                    Subcategory category = new Subcategory(rs.getLong(24), rs.getString(25), rs.getString(28));
-                    Book book = new Book(rs.getLong(7),rs.getString(8), rs.getString(9), author, language, category, rs.getString(13), rs.getInt(14), rs.getInt(15));
+                    Country country = new Country(rs.getLong(21), rs.getString(22));
+                    Author author = new Author(rs.getLong(17), rs.getString(18),rs.getString(19), country);
+                    Language language = new Language(rs.getLong(23), rs.getString(24));
+                    Subcategory category = new Subcategory(rs.getLong(25), rs.getString(26), rs.getString(29));
+                    Book book = new Book(rs.getLong(8),rs.getString(9), rs.getString(10), author, language, category, rs.getString(14), rs.getInt(15), rs.getInt(16));
                     BorrowDetails details = new BorrowDetails(rs.getLong(1), rs.getLong(2), book, 
                             new java.util.Date(rs.getDate(4).getTime()), 
                             new java.util.Date(rs.getDate(5).getTime()), 
@@ -198,11 +198,11 @@ public class BorrowDetailsDAOImpl implements IBorrowDetailsDAO{
             try(ResultSet rs = ps.executeQuery()){
                 
                 while (rs.next()) {
-                    Country country = new Country(rs.getLong(20), rs.getString(21));
-                    Author author = new Author(rs.getLong(16), rs.getString(17),rs.getString(18), country);
-                    Language language = new Language(rs.getLong(22), rs.getString(23));
-                    Subcategory category = new Subcategory(rs.getLong(24), rs.getString(25), rs.getString(28));
-                    Book book = new Book(rs.getLong(7),rs.getString(8), rs.getString(9), author, language, category, rs.getString(13), rs.getInt(14), rs.getInt(15));
+                    Country country = new Country(rs.getLong(21), rs.getString(22));
+                    Author author = new Author(rs.getLong(17), rs.getString(18),rs.getString(19), country);
+                    Language language = new Language(rs.getLong(23), rs.getString(24));
+                    Subcategory category = new Subcategory(rs.getLong(25), rs.getString(26), rs.getString(29));
+                    Book book = new Book(rs.getLong(8),rs.getString(9), rs.getString(10), author, language, category, rs.getString(14), rs.getInt(15), rs.getInt(16));
                     BorrowDetails details = new BorrowDetails(rs.getLong(1), rs.getLong(2), book, 
                             new java.util.Date(rs.getDate(4).getTime()), 
                             new java.util.Date(rs.getDate(5).getTime()), 
@@ -239,11 +239,11 @@ public class BorrowDetailsDAOImpl implements IBorrowDetailsDAO{
             try(ResultSet rs = ps.executeQuery()){
                 
                 while (rs.next()) {
-                    Country country = new Country(rs.getLong(20), rs.getString(21));
-                    Author author = new Author(rs.getLong(16), rs.getString(17),rs.getString(18), country);
-                    Language language = new Language(rs.getLong(22), rs.getString(23));
-                    Subcategory category = new Subcategory(rs.getLong(24), rs.getString(25), rs.getString(28));
-                    Book book = new Book(rs.getLong(7),rs.getString(8), rs.getString(9), author, language, category, rs.getString(13), rs.getInt(14), rs.getInt(15));
+                    Country country = new Country(rs.getLong(21), rs.getString(22));
+                    Author author = new Author(rs.getLong(17), rs.getString(18),rs.getString(19), country);
+                    Language language = new Language(rs.getLong(23), rs.getString(24));
+                    Subcategory category = new Subcategory(rs.getLong(25), rs.getString(26), rs.getString(29));
+                    Book book = new Book(rs.getLong(8),rs.getString(9), rs.getString(10), author, language, category, rs.getString(14), rs.getInt(15), rs.getInt(16));
                     BorrowDetails details = new BorrowDetails(rs.getLong(1), rs.getLong(2), book, 
                             new java.util.Date(rs.getDate(4).getTime()), 
                             new java.util.Date(rs.getDate(5).getTime()), 
@@ -280,11 +280,11 @@ public class BorrowDetailsDAOImpl implements IBorrowDetailsDAO{
             try(ResultSet rs = ps.executeQuery()){
                 
                 while (rs.next()) {
-                    Country country = new Country(rs.getLong(20), rs.getString(21));
-                    Author author = new Author(rs.getLong(16), rs.getString(17),rs.getString(18), country);
-                    Language language = new Language(rs.getLong(22), rs.getString(23));
-                    Subcategory category = new Subcategory(rs.getLong(24), rs.getString(25), rs.getString(28));
-                    Book book = new Book(rs.getLong(7),rs.getString(8), rs.getString(9), author, language, category, rs.getString(13), rs.getInt(14), rs.getInt(15));
+                    Country country = new Country(rs.getLong(21), rs.getString(22));
+                    Author author = new Author(rs.getLong(17), rs.getString(18),rs.getString(19), country);
+                    Language language = new Language(rs.getLong(23), rs.getString(24));
+                    Subcategory category = new Subcategory(rs.getLong(25), rs.getString(26), rs.getString(29));
+                    Book book = new Book(rs.getLong(8),rs.getString(9), rs.getString(10), author, language, category, rs.getString(14), rs.getInt(15), rs.getInt(16));
                     BorrowDetails details = new BorrowDetails(rs.getLong(1), rs.getLong(2), book, 
                             new java.util.Date(rs.getDate(4).getTime()), 
                             new java.util.Date(rs.getDate(5).getTime()), 
@@ -321,11 +321,11 @@ public class BorrowDetailsDAOImpl implements IBorrowDetailsDAO{
             try(ResultSet rs = ps.executeQuery()){
                 
                 while (rs.next()) {
-                    Country country = new Country(rs.getLong(20), rs.getString(21));
-                    Author author = new Author(rs.getLong(16), rs.getString(17),rs.getString(18), country);
-                    Language language = new Language(rs.getLong(22), rs.getString(23));
-                    Subcategory category = new Subcategory(rs.getLong(24), rs.getString(25), rs.getString(28));
-                    Book book = new Book(rs.getLong(7),rs.getString(8), rs.getString(9), author, language, category, rs.getString(13), rs.getInt(14), rs.getInt(15));
+                    Country country = new Country(rs.getLong(21), rs.getString(22));
+                    Author author = new Author(rs.getLong(17), rs.getString(18),rs.getString(19), country);
+                    Language language = new Language(rs.getLong(23), rs.getString(24));
+                    Subcategory category = new Subcategory(rs.getLong(25), rs.getString(26), rs.getString(29));
+                    Book book = new Book(rs.getLong(8),rs.getString(9), rs.getString(10), author, language, category, rs.getString(14), rs.getInt(15), rs.getInt(16));
                     BorrowDetails details = new BorrowDetails(rs.getLong(1), rs.getLong(2), book, 
                             new java.util.Date(rs.getDate(4).getTime()), 
                             new java.util.Date(rs.getDate(5).getTime()), 

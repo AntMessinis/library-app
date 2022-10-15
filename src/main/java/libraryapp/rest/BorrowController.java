@@ -58,6 +58,9 @@ public class BorrowController extends HttpServlet {
 	            borrow.setReturnDate(calendar.getTime());
 	            
 	            service.add(borrow);
+	            
+	            user.setBooksCurrentlyBorrowed(service.getListForMember(borrow));
+	            session.setAttribute("user", user);
 	        }
 	        
 	    }catch (Exception e) {

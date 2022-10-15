@@ -11,10 +11,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import libraryapp.dao.BorrowDetailsDAOImpl;
+import libraryapp.dao.IBorrowDetailsDAO;
 import libraryapp.dao.IUserDAO;
 import libraryapp.dao.UserDAOImpl;
+import libraryapp.dto.BorrowDetailsDTO;
 import libraryapp.dto.UserDTO;
 import libraryapp.model.User;
+import libraryapp.service.BorrowDetailsServiceImpl;
+import libraryapp.service.IBorrowDetailsService;
 import libraryapp.service.IUserService;
 import libraryapp.service.UserServiceImpl;
 
@@ -24,6 +29,8 @@ public class LoginController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     private final IUserDAO DAO = new UserDAOImpl();
     private final IUserService SERVICE = new UserServiceImpl(DAO);
+    
+    
    
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -41,10 +48,13 @@ public class LoginController extends HttpServlet {
 		try {
 			//  Search for user that matches username and pass
 			User user = SERVICE.userLogInValidation(dto);
-			
+
 			// if  user is found 
 			if (user != null) {
-				
+			    //Get books borrowed if any
+			    
+	            
+	            
 				// Get the old session and invalidate
 				HttpSession oldSession = request.getSession(false);
 				if (oldSession != null) oldSession.invalidate();

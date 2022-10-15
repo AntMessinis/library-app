@@ -190,6 +190,7 @@ function showSearchBookForm(){
 
     mainContainer.html(`
         <form id="bookUpdateForm">
+            <h3>Search for book to update</h3>
             <div class="row">
                 <div class=col-6>
                     <label for="searchBookTitle" class="form-label mt-3">Title</label>
@@ -253,7 +254,7 @@ function showUpdateBookForm(bookData){
         $('#feedback').html('<p class="text-danger">No book was found.</p>')
     }else{
         showBookForm();
-        $("#bookFormTitle").html("Update Book's Details")
+        $("#bookFormTitle").html(`Update ${bookData.title}'s Details`)
         getCategoriesFromDB();
         getAuthorsFromDB();
         getLanguagesFromDB();
@@ -421,7 +422,7 @@ function showBookForm(){
     <h3 id="bookFormTitle"></h3>
     <form id="bookForm">
         <div class="row">
-            <input id=bookId class="visually-hidden form-control me-sm-2" type="number>
+            <input id=bookId class="visually-hidden form-control me-sm-2" type="number">
         </div>
         <div class="row align-items-center">
         <div class="col-4">  
@@ -432,19 +433,19 @@ function showBookForm(){
         <label for="bookIsbn" class="form-label mt-3">ISBN</label>
         <input id="bookIsbn" class="form-control me-sm-2" type="text" placeholder="ISBN"></div>
         <div class="col-4">
-        <input id=authorId class="visually-hidden form-control me-sm-2" type="number> 
+        <input id=authorId class="visually-hidden form-control me-sm-2" type="number"> 
         <label for="authorSelect" class="form-label mt-3">Author</label>
         <select class="form-select" id="authorSelect" placeholder="Choose Author">        
         </select></div>
         </div>
         <div class="row align-items-center">
         <div class="col-4">
-        <input id=categoryId class="visually-hidden form-control me-sm-2" type="number>   
+        <input id=categoryId class="visually-hidden form-control me-sm-2" type="number">   
         <label for="categorySelect" class="form-label mt-3">Category</label>
         <select class="form-select" id="categorySelect" placeholder="Choose Category">
         </select></div>
         <div class="col-4">
-        <input id=languageId class="visually-hidden form-control me-sm-2" type="number>   
+        <input id=languageId class="visually-hidden form-control me-sm-2" type="number">   
         <label for="languageSelect" class="form-label mt-3">Language</label>
         <select class="form-select" id="languageSelect" placeholder="Choose Language">        
         </select></div>
