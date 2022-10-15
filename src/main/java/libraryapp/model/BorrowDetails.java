@@ -27,13 +27,14 @@ public class BorrowDetails extends AbstractEntity{
 	    this.returned = dto.isReturned();
 	}
 	
-	public BorrowDetails(long id, long memberId,Book book, Date borrowDate, Date returnDate, Date actualReturn) {
+	public BorrowDetails(long id, long memberId,Book book, Date borrowDate, Date returnDate, Date actualReturn, boolean returned) {
 		super(id);
 		this.memberId = memberId;
 		this.book = book;
 		this.borrowDate = borrowDate;
 		this.returnDate = returnDate;
 		this.actualReturn = actualReturn;
+		this.returned = returned;
 	}
 
 

@@ -44,7 +44,8 @@ public class BorrowDetailsDAOImpl implements IBorrowDetailsDAO{
     public void update(BorrowDetails m) throws SQLException {
         String sql =  "update borrow_details set actual_return=?, returned=?";
         try(PreparedStatement ps = DBUtil.openConnection().prepareStatement(sql)){
-            ps.setDate(1, new Date(m.getActualReturn().getTime()));
+            Date dateReturned = new Date(new java.util.Date().getTime());
+            ps.setDate(1, dateReturned);
             ps.setBoolean(2, true);
             ps.executeUpdate();
         }catch(SQLException e) {
@@ -88,7 +89,7 @@ public class BorrowDetailsDAOImpl implements IBorrowDetailsDAO{
                     BorrowDetails details = new BorrowDetails(rs.getLong(1), rs.getLong(2), book, 
                             new java.util.Date(rs.getDate(4).getTime()), 
                             new java.util.Date(rs.getDate(5).getTime()), 
-                            new java.util.Date(rs.getDate(6).getTime()));
+                            new java.util.Date(rs.getDate(6).getTime()), rs.getBoolean(7));
                     
                     return details;
                 }
@@ -125,7 +126,7 @@ public class BorrowDetailsDAOImpl implements IBorrowDetailsDAO{
                     BorrowDetails details = new BorrowDetails(rs.getLong(1), rs.getLong(2), book, 
                             new java.util.Date(rs.getDate(4).getTime()), 
                             new java.util.Date(rs.getDate(5).getTime()), 
-                            new java.util.Date(rs.getDate(6).getTime()));
+                            new java.util.Date(rs.getDate(6).getTime()), rs.getBoolean(7));
                     
                     return details;
                 }
@@ -165,7 +166,7 @@ public class BorrowDetailsDAOImpl implements IBorrowDetailsDAO{
                     BorrowDetails details = new BorrowDetails(rs.getLong(1), rs.getLong(2), book, 
                             new java.util.Date(rs.getDate(4).getTime()), 
                             new java.util.Date(rs.getDate(5).getTime()), 
-                            new java.util.Date(rs.getDate(6).getTime()));
+                            new java.util.Date(rs.getDate(6).getTime()), rs.getBoolean(7));
                     
                     detailsList.add(details);
                 }
@@ -206,7 +207,7 @@ public class BorrowDetailsDAOImpl implements IBorrowDetailsDAO{
                     BorrowDetails details = new BorrowDetails(rs.getLong(1), rs.getLong(2), book, 
                             new java.util.Date(rs.getDate(4).getTime()), 
                             new java.util.Date(rs.getDate(5).getTime()), 
-                            new java.util.Date(rs.getDate(6).getTime()));
+                            new java.util.Date(rs.getDate(6).getTime()), rs.getBoolean(7));
                     
                     detailsList.add(details);
                 }
@@ -247,7 +248,7 @@ public class BorrowDetailsDAOImpl implements IBorrowDetailsDAO{
                     BorrowDetails details = new BorrowDetails(rs.getLong(1), rs.getLong(2), book, 
                             new java.util.Date(rs.getDate(4).getTime()), 
                             new java.util.Date(rs.getDate(5).getTime()), 
-                            new java.util.Date(rs.getDate(6).getTime()));
+                            new java.util.Date(rs.getDate(6).getTime()), rs.getBoolean(7));
                     
                     detailsList.add(details);
                 }
@@ -288,7 +289,7 @@ public class BorrowDetailsDAOImpl implements IBorrowDetailsDAO{
                     BorrowDetails details = new BorrowDetails(rs.getLong(1), rs.getLong(2), book, 
                             new java.util.Date(rs.getDate(4).getTime()), 
                             new java.util.Date(rs.getDate(5).getTime()), 
-                            new java.util.Date(rs.getDate(6).getTime()));
+                            new java.util.Date(rs.getDate(6).getTime()), rs.getBoolean(7));
                     
                     detailsList.add(details);
                 }
@@ -329,7 +330,7 @@ public class BorrowDetailsDAOImpl implements IBorrowDetailsDAO{
                     BorrowDetails details = new BorrowDetails(rs.getLong(1), rs.getLong(2), book, 
                             new java.util.Date(rs.getDate(4).getTime()), 
                             new java.util.Date(rs.getDate(5).getTime()), 
-                            new java.util.Date(rs.getDate(6).getTime()));
+                            new java.util.Date(rs.getDate(6).getTime()), rs.getBoolean(7));
                     
                     detailsList.add(details);
                 }

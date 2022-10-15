@@ -89,7 +89,19 @@ public class BorrowDetailsServiceImpl implements IBorrowDetailsService{
 
     
     private BorrowDetails extractFields(BorrowDetailsDTO dto) {
-        BorrowDetails details = new BorrowDetails(dto);
+        //BorrowDetails details = new BorrowDetails(dto);
+        
+        BorrowDetails details = new BorrowDetails();
+        Book book = new Book();
+        book.setId(dto.getBook().getId());
+        
+        details.setId(dto.getId());
+        details.setMemberId(dto.getMemberId());
+        details.setBook(book);
+        details.setBorrowDate(dto.getBorrowDate());
+        details.setReturnDate(dto.getReturnDate());
+        details.setActualReturn(dto.getActualReturn());
+        details.setReturned(dto.isReturned());
         return details;
     }
 }

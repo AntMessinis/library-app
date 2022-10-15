@@ -23,6 +23,7 @@
         <table class="table table-hover">
             <thead>
             <tr>
+            <th scope="col">ID</th>
             <th scope="col">Title</th>
             <th scope="col">ISBN</th>
             <th scope="col">Date Borrowed</th>
@@ -32,7 +33,9 @@
         </thead>
         <tbody></tbody>
         <c:forEach var = "detail" items="${borrowList}">
-            <tr>
+        	<c:if test="${!detail.isReturned()}">
+        		<tr>
+            	<td>${detail.id}</td>
             	<td>${detail.book.title}</td>
                 <td>${detail.book.isbn}</td>
                 <td>${detail.borrowDate}</td>
@@ -47,7 +50,10 @@
                 		</c:otherwise>
                 	</c:choose>
                 </td>
+                <td><a href="${pageContext.request.contextPath}/return?borrowId=${detail.id}&bookId=${detail.book.id}" class="btn btn-primary">Return</a></td>
             </tr>
+        	</c:if>
+            
 	    </c:forEach>
 	    </table>
 		</c:when>

@@ -46,7 +46,7 @@ function handleBookTitleSearchResults(response){
             <p class="display-6"><span class="fw-bold text-decoration-underline">Category:</span> ${book.category.categoryName}, ${book.category.subcategoryName}</p>
             <p class="display-6"><span class="fw-bold text-decoration-underline">Language:</span> ${book.language.languageName}</p>
             <p class="display-6"><span class="fw-bold text-decoration-underline">Copies availiable:</span> ${book.copiesInLibrary}</p>
-            <a type="button" class="btn btn-primary" id="borrowButton">Request to borrow</a>
+            <a type="button" class="btn btn-primary ${(book.copiesInLibrary > 0? "": "disabled")}" id="borrowButton">Request to borrow</a>
           </div>
         </div>
         <div class="row mt-5">
