@@ -1,4 +1,4 @@
-# library-app (This project is still Under Development)
+# library-app
 This project is made as the final project for AUEB's Coding Factory Java course. 
 I'm building it with JavaEE - Maven - JDBC - JSP - JavaScript - JQuery - Jackson Databind - Bootstrap with Lux theme - MySQL - Service Oriented Architecture. I'm planning to remake the whole project in .NET with Blazor, WEBApi and Entity Framework.
 
